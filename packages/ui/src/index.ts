@@ -1,6 +1,10 @@
 // Utils
 export { cn } from './lib/utils'
 
+// Brand
+export { Logo } from './components/ui/logo'
+export type { LogoProps } from './components/ui/logo'
+
 // UI Components
 export { Button, buttonVariants } from './components/ui/button'
 export type { ButtonProps } from './components/ui/button'

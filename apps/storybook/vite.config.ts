@@ -4,6 +4,13 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [tailwindcss()],
+  server: {
+    fs: {
+      // Allow Vite dev server to serve files from the monorepo root
+      // (needed for packages/ui/assets/fonts/* and assets/*.svg)
+      allow: ['../..'],
+    },
+  },
   resolve: {
     alias: {
       // In dev/Storybook, use source CSS directly (avoids dist font path issues)

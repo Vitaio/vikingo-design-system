@@ -4,17 +4,10 @@ import {
   LayoutDashboard, Megaphone, Image, BarChart2,
   Settings, HelpCircle, Bell
 } from 'lucide-react'
-import { Sidebar, Topbar, PageLayout, PageContent, StatCard, Button, Badge, Avatar, AvatarFallback } from '@vikingo/ui'
-
-const Logo = () => (
-  <span className="font-display font-semibold text-lg text-[var(--sidebar-text)]">
-    Vikingo
-  </span>
-)
-
-const LogoIcon = () => (
-  <span className="font-display font-semibold text-lg text-[var(--color-accent)]">V</span>
-)
+import {
+  Sidebar, Topbar, PageLayout, PageContent,
+  StatCard, Button, Badge, Avatar, AvatarFallback, Logo
+} from '@vikingo/ui'
 
 const navSections = [
   {
@@ -35,20 +28,20 @@ const navSections = [
   },
 ]
 
-const SidebarDemo = () => {
+const DashboardDemo = () => {
   const [collapsed, setCollapsed] = useState(false)
 
   return (
     <PageLayout
       sidebar={
         <Sidebar
-          logo={<Logo />}
-          logoCollapsed={<LogoIcon />}
+          logo={<Logo variant="white" name="Vikingo" size="md" />}
+          logoCollapsed={<Logo variant="white" iconOnly size="sm" />}
           sections={navSections}
           collapsed={collapsed}
           onCollapsedChange={setCollapsed}
           footer={
-            !collapsed && (
+            !collapsed ? (
               <div className="flex items-center gap-2 px-1">
                 <Avatar size="sm">
                   <AvatarFallback>NB</AvatarFallback>
@@ -58,16 +51,24 @@ const SidebarDemo = () => {
                   <p className="text-[10px] font-mono text-[var(--sidebar-text-muted)] truncate">admin</p>
                 </div>
               </div>
+            ) : (
+              <Avatar size="sm">
+                <AvatarFallback>NB</AvatarFallback>
+              </Avatar>
             )
           }
         />
       }
       topbar={
         <Topbar
-          left={<h1 className="font-display font-semibold text-lg text-[var(--color-text)]">Dashboard</h1>}
+          left={
+            <h1 className="font-display font-semibold text-lg text-[var(--color-text)]">
+              Dashboard
+            </h1>
+          }
           right={
             <div className="flex items-center gap-2">
-              <Button variant="secondary" size="sm">
+              <Button variant="secondary" size="icon-sm">
                 <Bell className="h-4 w-4" />
               </Button>
               <Button size="sm">Új kampány</Button>
@@ -76,7 +77,10 @@ const SidebarDemo = () => {
         />
       }
     >
-      <PageContent title="Dashboard" description="Üdvözöljük a Vikingo vezérlőpultján.">
+      <PageContent
+        title="Dashboard"
+        description="Üdvözöljük a Vikingo vezérlőpultján."
+      >
         <div className="grid grid-cols-4 gap-4 mb-6">
           <StatCard label="Összes hirdetés" value="1,248" trend={5.2} trendLabel="vs. múlt hét" />
           <StatCard label="Aktív kampány" value="34" trend={0} trendLabel="változatlan" />
@@ -95,7 +99,7 @@ const SidebarDemo = () => {
 
 const meta: Meta = {
   title: 'Layout/PageLayout',
-  component: SidebarDemo,
+  component: DashboardDemo,
   parameters: { layout: 'fullscreen' },
   tags: ['autodocs'],
 }
