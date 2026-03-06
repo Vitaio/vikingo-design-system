@@ -26,6 +26,7 @@
     "**/*.css"
   ],
   "scripts": {
+    "prepare": "tsup",
     "build": "tsup",
     "dev": "tsup --watch",
     "lint": "tsc --noEmit",
