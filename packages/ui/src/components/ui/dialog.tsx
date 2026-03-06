@@ -40,7 +40,7 @@ const DialogContent = React.forwardRef<
         'fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%]',
         'bg-[var(--color-surface)] rounded-[var(--radius-xl)]',
         'border border-[var(--color-border)] shadow-[var(--shadow-xl)]',
-        'p-6 w-full',
+        'p-4 sm:p-6 w-[calc(100%-2rem)] sm:w-full',
         'data-[state=open]:animate-in data-[state=closed]:animate-out',
         'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
         'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
@@ -80,7 +80,7 @@ const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
 DialogHeader.displayName = 'DialogHeader'
 
 const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex items-center justify-end gap-3 mt-6', className)} {...props} />
+  <div className={cn('flex flex-col-reverse sm:flex-row items-center justify-end gap-2 sm:gap-3 mt-4 sm:mt-6', className)} {...props} />
 )
 DialogFooter.displayName = 'DialogFooter'
 
@@ -90,7 +90,7 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn('font-display font-semibold text-xl text-[var(--color-text)] tracking-tight', className)}
+    className={cn('font-display font-semibold text-lg sm:text-xl text-[var(--color-text)] tracking-tight', className)}
     {...props}
   />
 ))

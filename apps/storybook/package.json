@@ -7,22 +7,26 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@vikingo/ui": "workspace:*",
     "lucide-react": "^0.511.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.71.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.18",
     "@storybook/addon-essentials": "^8.6.17",
     "@storybook/addon-themes": "^8.6.17",
     "@storybook/blocks": "^8.6.17",
     "@storybook/react": "^8.6.17",
     "@storybook/react-vite": "^8.6.17",
+    "@tailwindcss/vite": "^4.1.7",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "storybook": "^8.6.17",
     "tailwindcss": "^4.1.7",
-    "@tailwindcss/vite": "^4.1.7",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
   }

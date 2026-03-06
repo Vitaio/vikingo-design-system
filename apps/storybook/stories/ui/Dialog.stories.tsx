@@ -13,6 +13,7 @@ const meta: Meta = {
     layout: 'centered',
     docs: { source: { type: 'code' } },
   },
+  decorators: [(Story) => <div className="p-8 bg-[var(--color-bg)]"><Story /></div>],
   tags: ['autodocs'],
 }
 export default meta

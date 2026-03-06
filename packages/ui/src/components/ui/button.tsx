@@ -19,28 +19,28 @@ const buttonVariants = cva(
         primary: [
           'bg-[var(--color-accent)] text-white shadow-[var(--shadow-sm)]',
           'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-md)]',
-          'active:scale-[0.97] active:shadow-none',
+          'btn-press',
         ].join(' '),
         secondary: [
           'bg-[var(--color-surface)] text-[var(--color-text)]',
           'border border-[var(--color-border)] shadow-[var(--shadow-sm)]',
           'hover:bg-[var(--color-bg)] hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-md)]',
-          'active:scale-[0.97] active:shadow-none',
+          'btn-press',
         ].join(' '),
         ghost: [
           'bg-transparent text-[var(--color-text)]',
           'hover:bg-[var(--color-accent-muted)] hover:text-[var(--color-accent)]',
-          'active:scale-[0.97]',
+          'btn-press',
         ].join(' '),
         destructive: [
           'bg-[var(--color-error)] text-white shadow-[var(--shadow-sm)]',
           'hover:bg-[var(--color-error)]/90 hover:shadow-[var(--shadow-md)]',
-          'active:scale-[0.97] active:shadow-none',
+          'btn-press',
         ].join(' '),
         outline: [
           'border border-[var(--color-accent)] text-[var(--color-accent)] bg-transparent',
           'hover:bg-[var(--color-accent-muted)] hover:shadow-[var(--shadow-sm)]',
-          'active:scale-[0.97]',
+          'btn-press',
         ].join(' '),
         link: [
           'text-[var(--color-accent)] underline-offset-4 hover:underline bg-transparent',

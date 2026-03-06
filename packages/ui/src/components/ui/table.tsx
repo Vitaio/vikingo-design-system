@@ -71,7 +71,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      'h-11 px-4 text-left align-middle',
+      'h-10 sm:h-11 px-3 sm:px-4 text-left align-middle',
       'text-xs font-mono font-medium text-[var(--color-text-muted)] uppercase tracking-wider',
       'whitespace-nowrap',
       sortable && 'cursor-pointer select-none hover:text-[var(--color-text)]',
@@ -100,7 +100,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      'px-4 py-3 align-middle text-[var(--color-text)]',
+      'px-3 sm:px-4 py-2 sm:py-3 align-middle text-[var(--color-text)]',
       '[&:has([role=checkbox])]:pr-0',
       className
     )}

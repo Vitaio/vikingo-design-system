@@ -123,6 +123,27 @@ export const WithResults: Story = {
   },
 }
 
+export const EmptyState: Story = {
+  name: 'Empty State · Nincs találat',
+  render: () => {
+    const [value, setValue] = useState('')
+    return (
+      <div className="w-80 p-6 bg-[var(--color-bg)]">
+        <SearchBar
+          value={value}
+          onChange={setValue}
+          results={value.trim() ? [] : undefined}
+          emptyText="Nincs találat erre a keresésre"
+          placeholder="Próbálj valami exotikusat..."
+        />
+        {!value && (
+          <p className="text-xs text-[var(--color-text-muted)] mt-2">Gépelj valamit — üres találatlista jelenik meg</p>
+        )}
+      </div>
+    )
+  },
+}
+
 export const GlobalSearch: Story = {
   name: 'Global Search · Globális keresés',
   render: () => {

@@ -2,10 +2,10 @@ import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
-// ── Types ───────────────────────────────────────────────────────────────────
+// ── Types ────────────────────────────────────────────────────────────────────
 
 export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** How many items to show at once (on desktop) */
+  /** How many items to show at once */
   itemsPerView?: 1 | 2 | 3 | 'auto'
   /** Show prev/next arrow buttons */
   showArrows?: boolean
@@ -15,24 +15,23 @@ export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   loop?: boolean
   /** Gap between items in px */
   gap?: number
+  /** Auto-advance interval in ms (0 = disabled) */
+  autoplay?: number
 }
 
-// ── CarouselItem ────────────────────────────────────────────────────────────
+// ── CarouselItem ─────────────────────────────────────────────────────────────
 
 export interface CarouselItemProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function CarouselItem({ className, children, ...props }: CarouselItemProps) {
   return (
-    <div
-      className={cn('shrink-0 snap-start', className)}
-      {...props}
-    >
+    <div className={cn('shrink-0 snap-start', className)} {...props}>
       {children}
     </div>
   )
 }
 
-// ── Carousel ────────────────────────────────────────────────────────────────
+// ── Carousel ─────────────────────────────────────────────────────────────────
 
 export function Carousel({
   itemsPerView = 1,
@@ -40,6 +39,7 @@ export function Carousel({
   showDots = true,
   loop = false,
   gap = 16,
+  autoplay = 0,
   className,
   children,
   ...props
@@ -48,44 +48,42 @@ export function Carousel({
   const [activeIndex, setActiveIndex] = useState(0)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(true)
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const items = React.Children.toArray(children)
   const count = items.length
 
   const getItemWidth = useCallback(() => {
-    if (!trackRef.current) return 0
-    const track = trackRef.current
-    if (itemsPerView === 'auto') return 0
-    return (track.offsetWidth - gap * (itemsPerView - 1)) / itemsPerView
+    if (!trackRef.current || itemsPerView === 'auto') return 0
+    return (trackRef.current.offsetWidth - gap * (itemsPerView - 1)) / itemsPerView
   }, [itemsPerView, gap])
 
   const scrollToIndex = useCallback(
     (index: number) => {
       if (!trackRef.current) return
-      const clampedIndex = loop
+      const clamped = loop
         ? ((index % count) + count) % count
         : Math.max(0, Math.min(index, count - 1))
 
       if (itemsPerView !== 'auto') {
         const itemW = getItemWidth()
-        const offset = clampedIndex * (itemW + gap)
-        trackRef.current.scrollTo({ left: offset, behavior: 'smooth' })
+        trackRef.current.scrollTo({ left: clamped * (itemW + gap), behavior: 'smooth' })
       }
-      setActiveIndex(clampedIndex)
+      setActiveIndex(clamped)
     },
     [count, gap, getItemWidth, itemsPerView, loop]
   )
 
-  // Track scroll position for dot sync
+  // Sync dots/arrows on scroll
   const onScroll = useCallback(() => {
     if (!trackRef.current || itemsPerView === 'auto') return
     const itemW = getItemWidth()
     if (itemW === 0) return
-    const scrollLeft = trackRef.current.scrollLeft
+    const { scrollLeft, scrollWidth, offsetWidth } = trackRef.current
     const idx = Math.round(scrollLeft / (itemW + gap))
     setActiveIndex(idx)
     setCanPrev(scrollLeft > 4)
-    setCanNext(scrollLeft < trackRef.current.scrollWidth - trackRef.current.offsetWidth - 4)
+    setCanNext(scrollLeft < scrollWidth - offsetWidth - 4)
   }, [gap, getItemWidth, itemsPerView])
 
   useEffect(() => {
@@ -95,6 +93,37 @@ export function Carousel({
     onScroll()
     return () => track.removeEventListener('scroll', onScroll)
   }, [onScroll])
+
+  // Autoplay
+  useEffect(() => {
+    if (!autoplay) return
+    autoplayRef.current = setInterval(() => {
+      setActiveIndex(i => {
+        const next = loop ? (i + 1) % count : Math.min(i + 1, count - 1)
+        scrollToIndex(next)
+        return next
+      })
+    }, autoplay)
+    return () => { if (autoplayRef.current) clearInterval(autoplayRef.current) }
+  }, [autoplay, loop, count, scrollToIndex])
+
+  // Keyboard navigation
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToIndex(activeIndex - 1) }
+    if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(activeIndex + 1) }
+  }
+
+  // Touch/swipe
+  const touchStartX = useRef(0)
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0].clientX
+  }
+  function handleTouchEnd(e: React.TouchEvent) {
+    const diff = touchStartX.current - e.changedTouches[0].clientX
+    if (Math.abs(diff) > 40) {
+      scrollToIndex(diff > 0 ? activeIndex + 1 : activeIndex - 1)
+    }
+  }
 
   // Compute item flex style
   const itemStyle: React.CSSProperties =
@@ -110,12 +139,21 @@ export function Carousel({
   })
 
   return (
-    <div className={cn('relative group/carousel', className)} {...props}>
+    <div
+      className={cn('relative group/carousel', className)}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      aria-roledescription="carousel"
+      style={{ outline: 'none' }}
+      {...props}
+    >
       {/* Track */}
       <div
         ref={trackRef}
         className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none"
         style={{ gap }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         {styledChildren}
       </div>

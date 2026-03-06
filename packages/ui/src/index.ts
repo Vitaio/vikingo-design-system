@@ -40,7 +40,8 @@ export {
 
 export { Checkbox } from './components/ui/checkbox'
 export { Switch } from './components/ui/switch'
-export { RadioGroup, RadioGroupItem } from './components/ui/radio-group'
+export { RadioGroup, RadioGroupItem, RadioButton } from './components/ui/radio-group'
+export type { RadioButtonProps } from './components/ui/radio-group'
 export { Textarea } from './components/ui/textarea'
 export type { TextareaProps } from './components/ui/textarea'
 export { Alert, AlertTitle, AlertDescription } from './components/ui/alert'
@@ -48,7 +49,8 @@ export type { AlertProps } from './components/ui/alert'
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './components/ui/accordion'
 export { Slider } from './components/ui/slider'
 export { Progress } from './components/ui/progress'
-export { Skeleton } from './components/ui/skeleton'
+export { Skeleton, SkeletonText, SkeletonCircle, SkeletonCard, SkeletonButton } from './components/ui/skeleton'
+export type { SkeletonTextProps, SkeletonCircleProps, SkeletonCardProps, SkeletonButtonProps } from './components/ui/skeleton'
 export { Separator } from './components/ui/separator'
 
 export { Avatar, AvatarImage, AvatarFallback } from './components/ui/avatar'
@@ -128,6 +130,34 @@ export {
 
 export { Toaster, toast } from './components/ui/toast'
 
+// New components
+export { EmptyState } from './components/ui/empty-state'
+export type { EmptyStateProps } from './components/ui/empty-state'
+
+export { ConfirmDialog } from './components/ui/confirm-dialog'
+export type { ConfirmDialogProps } from './components/ui/confirm-dialog'
+
+export {
+  Drawer,
+  DrawerTrigger,
+  DrawerPortal,
+  DrawerOverlay,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerBody,
+  DrawerFooter,
+} from './components/ui/drawer'
+export type { DrawerContentProps } from './components/ui/drawer'
+
+export { Combobox } from './components/ui/combobox'
+export type { ComboboxProps, ComboboxOption } from './components/ui/combobox'
+
+export { FileUpload } from './components/ui/file-upload'
+export type { FileUploadProps } from './components/ui/file-upload'
+
 // Navigation Components
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './components/ui/tabs'
 
@@ -172,6 +202,36 @@ export type { MultiBarChartProps, BarConfig } from './components/charts/bar-char
 
 export { MultiLineChart } from './components/charts/line-chart'
 export type { MultiLineChartProps, LineConfig } from './components/charts/line-chart'
+
+// CommandPalette
+export {
+  CommandPalette,
+  CommandPaletteTrigger,
+  CommandGroup,
+  CommandItem,
+  CommandSeparator,
+  CommandEmpty,
+  useCommandPalette,
+} from './components/ui/command-palette'
+export type {
+  CommandPaletteProps,
+  CommandGroupProps,
+  CommandItemProps,
+  CommandEmptyProps,
+} from './components/ui/command-palette'
+
+// Form (react-hook-form integration)
+export {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+  useFormField,
+} from './components/ui/form'
+export type { FormLabelProps } from './components/ui/form'
 
 // Layout Components
 export { usePageLayout } from './components/layout/page-layout-context'

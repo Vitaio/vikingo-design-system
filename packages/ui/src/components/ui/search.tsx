@@ -1,4 +1,4 @@
-import React, { useId, useState, useRef, useEffect } from 'react'
+import React, { useId, useState, useRef } from 'react'
 import { Search as SearchIcon, X, Loader2 } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
@@ -12,12 +12,36 @@ export interface SearchResult {
   category?: string
 }
 
+// ── Highlight helper ─────────────────────────────────────────────────────────
+
+function HighlightText({ text, query }: { text: string; query: string }) {
+  if (!query.trim()) return <>{text}</>
+  const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
+  const parts = text.split(regex)
+  return (
+    <>
+      {parts.map((part, i) =>
+        regex.test(part) ? (
+          <mark key={i} className="bg-[var(--color-accent-muted)] text-[var(--color-accent)] rounded-[2px] font-semibold not-italic">
+            {part}
+          </mark>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  )
+}
+
 // ── SearchBar ───────────────────────────────────────────────────────────────
 
 export interface SearchBarProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value' | 'size' | 'results'> {
   value?: string
+  defaultValue?: string
   onChange?: (value: string) => void
   onClear?: () => void
+  /** Text shown when results is empty and there is a query */
+  emptyText?: string
   /** Loading state (e.g. while searching) */
   loading?: boolean
   /** Search results for dropdown */
@@ -34,12 +58,14 @@ export interface SearchBarProps extends Omit<React.InputHTMLAttributes<HTMLInput
 
 export function SearchBar({
   value,
+  defaultValue,
   onChange,
   onClear,
   loading = false,
   results,
   onResultSelect,
   placeholder = 'Keresés...',
+  emptyText = 'Nincs találat',
   size = 'md',
   variant = 'field',
   className,
@@ -48,7 +74,7 @@ export function SearchBar({
   ...props
 }: SearchBarProps) {
   const id = useId()
-  const [internalValue, setInternalValue] = useState('')
+  const [internalValue, setInternalValue] = useState(defaultValue ?? '')
   const [focused, setFocused] = useState(false)
   const [activeIndex, setActiveIndex] = useState(-1)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -86,7 +112,9 @@ export function SearchBar({
     }
   }
 
-  const showDropdown = focused && results && results.length > 0 && currentValue.length > 0
+  // Show dropdown if focused, results prop is provided, and there's a query
+  const hasQuery = currentValue.length > 0
+  const showDropdown = focused && results !== undefined && hasQuery && !loading
 
   const sizeClasses = {
     sm: 'h-8 text-xs px-3',
@@ -184,60 +212,67 @@ export function SearchBar({
             'overflow-hidden'
           )}
         >
-          {/* Group by category */}
-          {(() => {
-            const grouped = results.reduce<Record<string, SearchResult[]>>((acc, r) => {
-              const cat = r.category ?? ''
-              ;(acc[cat] ??= []).push(r)
-              return acc
-            }, {})
+          {results!.length === 0 ? (
+            <div className="px-3 py-4 text-center text-sm text-[var(--color-text-subtle)]">
+              {emptyText}
+            </div>
+          ) : (
+            (() => {
+              const grouped = results!.reduce<Record<string, SearchResult[]>>((acc, r) => {
+                const cat = r.category ?? ''
+                ;(acc[cat] ??= []).push(r)
+                return acc
+              }, {})
 
-            let globalIndex = 0
+              let globalIndex = 0
 
-            return Object.entries(grouped).map(([cat, items]) => (
-              <div key={cat}>
-                {cat && (
-                  <div className="px-3 pt-2 pb-1 text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-subtle)]">
-                    {cat}
-                  </div>
-                )}
-                {items.map((result) => {
-                  const idx = globalIndex++
-                  const isActive = idx === activeIndex
-                  return (
-                    <button
-                      key={result.id}
-                      type="button"
-                      role="option"
-                      aria-selected={isActive}
-                      onMouseDown={(e) => {
-                        e.preventDefault()
-                        onResultSelect?.(result)
-                        setFocused(false)
-                      }}
-                      className={cn(
-                        'w-full flex items-center gap-3 px-3 py-2 text-left transition-colors',
-                        'focus-visible:outline-none',
-                        isActive
-                          ? 'bg-[var(--color-accent-muted)] text-[var(--color-accent)]'
-                          : 'hover:bg-[var(--color-bg)] text-[var(--color-text)]'
-                      )}
-                    >
-                      {result.icon && (
-                        <span className="shrink-0 text-[var(--color-text-muted)]">{result.icon}</span>
-                      )}
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{result.label}</p>
-                        {result.description && (
-                          <p className="text-xs text-[var(--color-text-muted)] truncate">{result.description}</p>
+              return Object.entries(grouped).map(([cat, items]) => (
+                <div key={cat}>
+                  {cat && (
+                    <div className="px-3 pt-2 pb-1 text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-subtle)]">
+                      {cat}
+                    </div>
+                  )}
+                  {items.map((result) => {
+                    const idx = globalIndex++
+                    const isActive = idx === activeIndex
+                    return (
+                      <button
+                        key={result.id}
+                        type="button"
+                        role="option"
+                        aria-selected={isActive}
+                        onMouseDown={(e) => {
+                          e.preventDefault()
+                          onResultSelect?.(result)
+                          setFocused(false)
+                        }}
+                        className={cn(
+                          'w-full flex items-center gap-3 px-3 py-2 text-left transition-colors',
+                          'focus-visible:outline-none',
+                          isActive
+                            ? 'bg-[var(--color-accent-muted)] text-[var(--color-accent)]'
+                            : 'hover:bg-[var(--color-bg)] text-[var(--color-text)]'
                         )}
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
-            ))
-          })()}
+                      >
+                        {result.icon && (
+                          <span className="shrink-0 text-[var(--color-text-muted)]">{result.icon}</span>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium truncate">
+                            <HighlightText text={result.label} query={currentValue} />
+                          </p>
+                          {result.description && (
+                            <p className="text-xs text-[var(--color-text-muted)] truncate">{result.description}</p>
+                          )}
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
+              ))
+            })()
+          )}
         </div>
       )}
     </div>

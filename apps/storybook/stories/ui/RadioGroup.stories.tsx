@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import { RadioGroup, RadioGroupItem } from '@vikingo/ui'
+import { RadioGroup, RadioGroupItem, RadioButton } from '@vikingo/ui'
 
 const meta: Meta = {
-  title: 'Forms/Radio Group',
+  title: 'Forms/Radio Button',
   parameters: { layout: 'centered', docs: { source: { type: 'code' } } },
   tags: ['autodocs'],
 }
@@ -23,10 +23,7 @@ export const Default: Story = {
             { value: '90d', label: 'Utolsó 90 nap' },
             { value: 'all', label: 'Teljes időszak' },
           ].map(opt => (
-            <label key={opt.value} className="flex items-center gap-2.5 cursor-pointer">
-              <RadioGroupItem value={opt.value} />
-              <span className="text-sm text-[var(--color-text)]">{opt.label}</span>
-            </label>
+            <RadioButton key={opt.value} value={opt.value} label={opt.label} />
           ))}
         </RadioGroup>
         <p className="mt-3 text-xs text-[var(--color-text-muted)] font-mono">
@@ -35,6 +32,54 @@ export const Default: Story = {
       </div>
     )
   },
+}
+
+export const WithDescription: Story = {
+  name: 'With Description · Leírással',
+  render: () => {
+    const [value, setValue] = useState('weekly')
+    return (
+      <div className="w-72 p-4 bg-[var(--color-bg)]">
+        <p className="text-sm font-medium text-[var(--color-text)] mb-3">Riport frekvenciája</p>
+        <RadioGroup value={value} onValueChange={setValue} className="gap-3">
+          <RadioButton
+            value="daily"
+            label="Naponta"
+            description="Minden reggel 8:00-kor"
+          />
+          <RadioButton
+            value="weekly"
+            label="Hetente"
+            description="Minden hétfőn, 8:00-kor"
+          />
+          <RadioButton
+            value="monthly"
+            label="Havonta"
+            description="Minden hónap 1-jén"
+          />
+          <RadioButton
+            value="never"
+            label="Soha"
+            description="Értesítések kikapcsolva"
+            disabled
+          />
+        </RadioGroup>
+      </div>
+    )
+  },
+}
+
+export const Disabled: Story = {
+  name: 'Disabled · Letiltott',
+  render: () => (
+    <div className="p-4 bg-[var(--color-bg)]">
+      <RadioGroup defaultValue="b" className="gap-3" disabled>
+        <RadioButton value="a" label="Opció A" />
+        <RadioButton value="b" label="Opció B (kiválasztott)" />
+        <RadioButton value="c" label="Opció C" />
+      </RadioGroup>
+    </div>
+  ),
 }
 
 export const PlanSelector: Story = {

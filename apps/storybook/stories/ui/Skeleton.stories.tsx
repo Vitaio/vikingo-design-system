@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Skeleton } from '@vikingo/ui'
+import { Skeleton, SkeletonText, SkeletonCircle, SkeletonCard, SkeletonButton } from '@vikingo/ui'
 
 const meta: Meta = {
   title: 'Display/Skeleton',
@@ -8,6 +8,41 @@ const meta: Meta = {
 }
 export default meta
 type Story = StoryObj
+
+export const Variants: Story = {
+  name: 'Variants · Variánsok',
+  render: () => (
+    <div className="flex flex-col gap-8 p-6 bg-[var(--color-bg)] w-96">
+      <div>
+        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">SkeletonText</p>
+        <SkeletonText lines={3} />
+      </div>
+      <div className="flex items-center gap-4">
+        <div>
+          <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">SkeletonCircle</p>
+          <div className="flex items-end gap-3">
+            <SkeletonCircle size="sm" />
+            <SkeletonCircle size="md" />
+            <SkeletonCircle size="lg" />
+            <SkeletonCircle size="xl" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">SkeletonCard</p>
+        <SkeletonCard />
+      </div>
+      <div>
+        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">SkeletonButton</p>
+        <div className="flex items-center gap-3">
+          <SkeletonButton size="sm" />
+          <SkeletonButton size="md" />
+          <SkeletonButton size="lg" />
+        </div>
+      </div>
+    </div>
+  ),
+}
 
 export const CardSkeleton: Story = {
   name: 'Card Skeleton · Kártyaskeleton',

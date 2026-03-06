@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import "tailwindcss";
 @import "./fonts.css";
+@source "../**/*.{ts,tsx}";
+
+.btn-press:active {
+  box-shadow: 0 0 0 3px var(--color-accent-muted);
+}
 
 /*
  * Vikingo Design System – CSS Custom Properties
@@ -106,6 +111,8 @@
 
   /* ===== DARK MODE ===== */
   .dark {
+    color-scheme: dark;
+
     --color-bg:              #2A1F30;
     --color-surface:         #3E2E45;
     --color-surface-raised:  #4E3A58;
@@ -124,10 +131,15 @@
     --color-border-strong:   #5A4268;
     --color-border-focus:    #FF544D;
 
-    --color-success-muted:   rgba(34, 197, 94, 0.18);
-    --color-warning-muted:   rgba(245, 158, 11, 0.18);
-    --color-error-muted:     rgba(239, 68, 68, 0.18);
-    --color-info-muted:      rgba(59, 130, 246, 0.18);
+    --color-success:         #4ADE80;
+    --color-warning:         #FBB040;
+    --color-error:           #F87171;
+    --color-info:            #60A5FA;
+
+    --color-success-muted:   rgba(74, 222, 128, 0.18);
+    --color-warning-muted:   rgba(251, 176, 64, 0.18);
+    --color-error-muted:     rgba(248, 113, 113, 0.18);
+    --color-info-muted:      rgba(96, 165, 250, 0.18);
 
     --shadow-sm:             0 1px 2px rgba(0, 0, 0, 0.2);
     --shadow-md:             0 4px 12px rgba(0, 0, 0, 0.3);
@@ -222,6 +234,20 @@
 .slide-in-from-left-2   { --tw-enter-translate-x: -0.5rem; }
 .slide-in-from-right-2  { --tw-enter-translate-x:  0.5rem; }
 
+/* ===== DRAWER / SLIDE ANIMATIONS ===== */
+.slide-in-from-right-full { --tw-enter-translate-x: 100%; }
+.slide-in-from-left-full  { --tw-enter-translate-x: -100%; }
+.slide-in-from-bottom-full { --tw-enter-translate-y: 100%; }
+.slide-out-to-right-full  { --tw-exit-translate-x: 100%; }
+.slide-out-to-left-full   { --tw-exit-translate-x: -100%; }
+.slide-out-to-bottom-full { --tw-exit-translate-y: 100%; }
+
+/* Used by Dialog */
+.slide-in-from-left-1\/2   { --tw-enter-translate-x: -50%; }
+.slide-in-from-top-\[48\%\] { --tw-enter-translate-y: -48%; }
+.slide-out-to-left-1\/2    { --tw-exit-translate-x: -50%; }
+.slide-out-to-top-\[48\%\]  { --tw-exit-translate-y: -48%; }
+
 /* ===== ACCORDION ANIMATIONS ===== */
 @keyframes accordion-down {
   from { height: 0; opacity: 0; }
@@ -275,6 +301,13 @@
   }
 
   /* Scrollbar */
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;

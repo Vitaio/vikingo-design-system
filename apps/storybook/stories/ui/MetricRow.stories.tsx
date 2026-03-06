@@ -4,6 +4,7 @@ import { MetricRow, Card, CardContent, formatFt, formatSzam } from '@vikingo/ui'
 const meta: Meta = {
   title: 'Data/Metric Row',
   parameters: { layout: 'centered' },
+  decorators: [(Story) => <div className="p-6 bg-[var(--color-bg)]"><Story /></div>],
   tags: ['autodocs'],
 }
 export default meta

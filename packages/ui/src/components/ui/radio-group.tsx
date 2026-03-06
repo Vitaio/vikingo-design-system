@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
-import { Circle } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 const RadioGroup = React.forwardRef<
@@ -22,22 +21,66 @@ const RadioGroupItem = React.forwardRef<
   <RadioGroupPrimitive.Item
     ref={ref}
     className={cn(
-      'aspect-square h-4 w-4 rounded-full shrink-0',
-      'border border-[var(--color-border-strong)]',
-      'bg-[var(--color-surface)]',
+      'aspect-square h-5 w-5 rounded-full shrink-0 cursor-pointer',
+      'border-2 border-[var(--color-border-strong)]',
+      'bg-transparent',
       'transition-colors duration-[var(--transition-fast)]',
+      'hover:border-[var(--color-accent)] hover:bg-[var(--color-accent-muted)]',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2',
-      'disabled:cursor-not-allowed disabled:opacity-50',
-      'data-[state=checked]:border-[var(--color-accent)] data-[state=checked]:bg-[var(--color-accent)]',
+      'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-[var(--color-border-strong)] disabled:hover:bg-transparent',
+      'data-[state=checked]:border-[var(--color-accent)]',
       className
     )}
     {...props}
   >
     <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-      <Circle className="h-1.5 w-1.5 fill-white text-white" />
+      <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] block" />
     </RadioGroupPrimitive.Indicator>
   </RadioGroupPrimitive.Item>
 ))
 RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
 
-export { RadioGroup, RadioGroupItem }
+// ── RadioButton — convenience wrapper with label + description ───────────────
+
+export interface RadioButtonProps
+  extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {
+  label?: string
+  description?: string
+}
+
+const RadioButton = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Item>,
+  RadioButtonProps
+>(({ label, description, className, id, ...props }, ref) => {
+  const itemId = id ?? React.useId()
+  return (
+    <label
+      htmlFor={itemId}
+      className="flex items-center gap-3 cursor-pointer group"
+    >
+      <RadioGroupItem
+        ref={ref}
+        id={itemId}
+        className={className}
+        {...props}
+      />
+      {(label || description) && (
+        <div className="flex flex-col gap-0.5 min-w-0">
+          {label && (
+            <span className="text-sm font-medium text-[var(--color-text)] leading-tight">
+              {label}
+            </span>
+          )}
+          {description && (
+            <span className="text-xs text-[var(--color-text-muted)]">
+              {description}
+            </span>
+          )}
+        </div>
+      )}
+    </label>
+  )
+})
+RadioButton.displayName = 'RadioButton'
+
+export { RadioGroup, RadioGroupItem, RadioButton }

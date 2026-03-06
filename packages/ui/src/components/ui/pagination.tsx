@@ -59,7 +59,7 @@ const PaginationPrevious = ({ className, ...props }: React.ComponentProps<'a'>) 
     {...props}
   >
     <ChevronLeft className="h-4 w-4 shrink-0" />
-    <span>Előző</span>
+    <span className="hidden sm:inline">Előző</span>
   </a>
 )
 PaginationPrevious.displayName = 'PaginationPrevious'
@@ -74,7 +74,7 @@ const PaginationNext = ({ className, ...props }: React.ComponentProps<'a'>) => (
     )}
     {...props}
   >
-    <span>Következő</span>
+    <span className="hidden sm:inline">Következő</span>
     <ChevronRight className="h-4 w-4 shrink-0" />
   </a>
 )

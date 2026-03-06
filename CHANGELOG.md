@@ -4,6 +4,40 @@ All notable changes to the Vikingo Design System.
 
 ---
 
+## [0.4.0] – 2026-03-06
+
+### New Components
+- **Form** (`Forms/Form`) — react-hook-form + zod integration; `Form`, `FormField`, `FormItem`, `FormLabel`, `FormControl`, `FormDescription`, `FormMessage`, `useFormField`; `required` asterisk, error state on label, ARIA attributes via Radix Slot
+- **CommandPalette** (`Overlays/Command Palette`) — Cmd+K search palette built on Radix Dialog; `CommandPalette`, `CommandPaletteTrigger`, `CommandGroup`, `CommandItem`, `CommandSeparator`, `CommandEmpty`; real-time query filtering, keyboard close (Esc), custom trigger support
+- **Drawer** (`Overlays/Drawer`) — Radix Dialog-based slide-in panel; `left`, `right`, `bottom` placement variants; `DrawerClose` for asChild action buttons; `hideClose` prop
+- **EmptyState** (`Display/Empty State`) — zero-data placeholder; icon slot, title, description, optional action button; variants: default, search, error, permission
+- **FileUpload** (`Forms/File Upload`) — drag-and-drop zone with file list, progress bar per file, remove button, `accept`/`maxSize`/`multiple` props
+- **Combobox** (`Forms/Combobox`) — searchable select with popover dropdown; keyboard navigation, custom empty state, grouped options support
+- **ConfirmDialog** (`Overlays/Confirm Dialog`) — destructive action confirmation dialog; `title`, `description`, `confirmLabel`, `cancelLabel`, `variant` (destructive/warning), async `onConfirm` with loading state
+
+### New Stories
+- `Display/Logo` — size variants (sm/md/lg), white/dark variant, iconOnly mode, on dark + light backgrounds
+- `Layout/Topbar` — Default, WithAvatar, WithLogo, WithBadges, Minimal
+- `Forms/Form` — BasicForm, RegistrationForm, WithValidationErrors, TwoColumnLayout, WithIcons
+
+### Dark Mode Fixes
+- `globals.css`: Added `color-scheme: dark` to `.dark` block — native browser elements (scrollbar, select, date input) now adopt dark styling
+- `globals.css`: Status colors overridden in dark mode for better contrast on dark backgrounds (`--color-success: #4ADE80`, `--color-warning: #FBB040`, `--color-error: #F87171`, `--color-info: #60A5FA`); muted variants updated to match
+- `Dialog.stories`, `MetricRow.stories`, `PeriodFilter.stories`: Added `bg-[var(--color-bg)]` meta-level decorators so canvas background follows dark/light mode
+
+### Storybook DX
+- Added `@storybook/addon-a11y` — automatic accessibility audit panel (ARIA, contrast, label issues) in every story
+- Added viewport presets: Mobile S (375px), Mobile L (430px), Tablet (768px), Desktop (1440px)
+
+### Button
+- Active state changed from `scale(0.97)` to an outer glow ring (`box-shadow: 0 0 0 3px var(--color-accent-muted)`) — no size change, no color/readability impact
+
+### Other
+- `globals.css`: Added `@source "../**/*.{ts,tsx}"` so Tailwind v4 scans all component source files
+- `globals.css`: Added `.btn-press:active` utility class outside any layer for guaranteed CSS generation
+
+---
+
 ## [0.3.0] – 2026-03-06
 
 ### New Components

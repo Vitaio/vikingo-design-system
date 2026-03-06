@@ -6,6 +6,7 @@ const meta: Meta<typeof PeriodFilter> = {
   title: 'Data/Period Filter',
   component: PeriodFilter,
   parameters: { layout: 'centered' },
+  decorators: [(Story) => <div className="p-6 bg-[var(--color-bg)]"><Story /></div>],
   tags: ['autodocs'],
 }
 export default meta

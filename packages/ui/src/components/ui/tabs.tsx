@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 const Tabs = TabsPrimitive.Root
@@ -9,25 +10,92 @@ const TabsList = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> & {
     variant?: 'default' | 'pills' | 'underline'
   }
->(({ className, variant = 'default', ...props }, ref) => (
-  <TabsPrimitive.List
-    ref={ref}
-    className={cn(
-      'flex items-center',
-      variant === 'default' && [
-        'h-10 rounded-[var(--radius-md)] bg-[var(--color-bg)]',
-        'border border-[var(--color-border)] p-1 gap-1',
-      ],
-      variant === 'pills' && 'gap-1',
-      variant === 'underline' && [
-        'border-b border-[var(--color-border)] gap-0',
-      ],
-      className
-    )}
-    data-variant={variant}
-    {...props}
-  />
-))
+>(({ className, variant = 'default', ...props }, ref) => {
+  const innerRef = React.useRef<HTMLElement>(null)
+  const [showLeft, setShowLeft] = React.useState(false)
+  const [showRight, setShowRight] = React.useState(false)
+
+  const updateArrows = React.useCallback(() => {
+    const el = innerRef.current
+    if (!el) return
+    setShowLeft(el.scrollLeft > 2)
+    setShowRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 2)
+  }, [])
+
+  React.useEffect(() => {
+    const el = innerRef.current
+    if (!el) return
+    updateArrows()
+    el.addEventListener('scroll', updateArrows, { passive: true })
+    const ro = new ResizeObserver(updateArrows)
+    ro.observe(el)
+    return () => {
+      el.removeEventListener('scroll', updateArrows)
+      ro.disconnect()
+    }
+  }, [updateArrows])
+
+  const mergedRef = React.useCallback(
+    (node: React.ElementRef<typeof TabsPrimitive.List> | null) => {
+      ;(innerRef as React.MutableRefObject<typeof node>).current = node
+      if (typeof ref === 'function') ref(node)
+      else if (ref) ref.current = node
+    },
+    [ref]
+  )
+
+  return (
+    <div className="relative flex items-center min-w-0 w-full">
+      {showLeft && (
+        <button
+          type="button"
+          aria-hidden="true"
+          tabIndex={-1}
+          onClick={() => innerRef.current?.scrollBy({ left: -120, behavior: 'smooth' })}
+          className={cn(
+            'absolute left-0 z-10 flex items-center justify-center h-full w-8 shrink-0',
+            'bg-gradient-to-r from-[var(--color-bg)] to-transparent',
+            'text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors',
+          )}
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+      )}
+      <TabsPrimitive.List
+        ref={mergedRef}
+        className={cn(
+          'flex items-center overflow-x-auto scrollbar-none w-full',
+          variant === 'default' && [
+            'h-10 rounded-[var(--radius-md)] bg-[var(--color-bg)]',
+            'border border-[var(--color-border)] p-1 gap-1',
+          ],
+          variant === 'pills' && 'gap-1',
+          variant === 'underline' && [
+            'border-b border-[var(--color-border)] gap-0',
+          ],
+          className
+        )}
+        data-variant={variant}
+        {...props}
+      />
+      {showRight && (
+        <button
+          type="button"
+          aria-hidden="true"
+          tabIndex={-1}
+          onClick={() => innerRef.current?.scrollBy({ left: 120, behavior: 'smooth' })}
+          className={cn(
+            'absolute right-0 z-10 flex items-center justify-center h-full w-8 shrink-0',
+            'bg-gradient-to-l from-[var(--color-bg)] to-transparent',
+            'text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors',
+          )}
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      )}
+    </div>
+  )
+})
 TabsList.displayName = TabsPrimitive.List.displayName
 
 const TabsTrigger = React.forwardRef<
