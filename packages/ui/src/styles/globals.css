@@ -45,15 +45,26 @@
     --color-info:            #3B82F6;
     --color-info-muted:      rgba(59, 130, 246, 0.12);
 
-    /* ===== SIDEBAR (always dark) ===== */
+    /* ===== SIDEBAR dark (alapértelmezett) ===== */
     --sidebar-bg:            #3E2E45;
     --sidebar-bg-hover:      #4E3A58;
-    --sidebar-bg-active:     #5A4268;
+    --sidebar-bg-active:     #FF544D;
+    --sidebar-bg-active-hover: #E83D36;
     --sidebar-text:          #F6EFE8;
+    --sidebar-text-active:   #FFFFFF;
     --sidebar-text-muted:    rgba(246, 239, 232, 0.6);
     --sidebar-border:        rgba(246, 239, 232, 0.1);
     --sidebar-width:         240px;
     --sidebar-width-collapsed: 64px;
+
+    /* ===== SIDEBAR light variant ===== */
+    --sidebar-light-bg:            #FFFFFF;
+    --sidebar-light-bg-hover:      #F6EFE8;
+    --sidebar-light-bg-active:     rgba(255, 84, 77, 0.10);
+    --sidebar-light-text:          #3E2E45;
+    --sidebar-light-text-active:   #FF544D;
+    --sidebar-light-text-muted:    #9B8FA3;
+    --sidebar-light-border:        #E0D9D1;
 
     /* ===== TYPOGRAPHY ===== */
     --font-display:          'Clash Display', 'Inter', sans-serif;
@@ -129,7 +140,9 @@
 }
 
 /* ===== TAILWIND v4 THEME BRIDGE ===== */
-@theme {
+@source '../**/*.tsx';
+@source '../../../../apps/storybook/stories/**/*.tsx';
+@theme inline {
   /* Colors */
   --color-bg: var(--color-bg);
   --color-surface: var(--color-surface);
@@ -159,6 +172,70 @@
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
   --radius-full: var(--radius-full);
+}
+
+/* ===== ENTER / EXIT ANIMATIONS (Radix UI overlay components) ===== */
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform:
+      translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0)
+      scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1))
+      rotate(var(--tw-enter-rotate, 0));
+  }
+}
+@keyframes exit {
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform:
+      translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0)
+      scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1))
+      rotate(var(--tw-exit-rotate, 0));
+  }
+}
+.animate-in {
+  animation-name: enter;
+  animation-duration: 150ms;
+  animation-fill-mode: both;
+  --tw-enter-opacity: initial;
+  --tw-enter-scale: initial;
+  --tw-enter-rotate: initial;
+  --tw-enter-translate-x: initial;
+  --tw-enter-translate-y: initial;
+}
+.animate-out {
+  animation-name: exit;
+  animation-duration: 150ms;
+  animation-fill-mode: both;
+  --tw-exit-opacity: initial;
+  --tw-exit-scale: initial;
+  --tw-exit-rotate: initial;
+  --tw-exit-translate-x: initial;
+  --tw-exit-translate-y: initial;
+}
+.fade-in-0  { --tw-enter-opacity: 0; }
+.fade-out-0 { --tw-exit-opacity: 0; }
+.zoom-in-95  { --tw-enter-scale: 0.95; }
+.zoom-out-95 { --tw-exit-scale: 0.95; }
+.slide-in-from-top-2    { --tw-enter-translate-y: -0.5rem; }
+.slide-in-from-bottom-2 { --tw-enter-translate-y:  0.5rem; }
+.slide-in-from-left-2   { --tw-enter-translate-x: -0.5rem; }
+.slide-in-from-right-2  { --tw-enter-translate-x:  0.5rem; }
+
+/* ===== ACCORDION ANIMATIONS ===== */
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+.animate-accordion-down {
+  animation: accordion-down 200ms ease;
+}
+.animate-accordion-up {
+  animation: accordion-up 200ms ease;
 }
 
 /* ===== GLOBAL BASE STYLES ===== */

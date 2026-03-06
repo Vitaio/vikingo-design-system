@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 const TypographyShowcase = () => (
   <div className="p-8 bg-[var(--color-bg)] min-h-screen min-w-[800px] space-y-10">
-    <h1 className="font-display font-semibold text-2xl text-[var(--color-text)]">Typography</h1>
+    <h1 className="font-display font-semibold text-2xl text-[var(--color-text)]">Typography · Tipográfia</h1>
 
     <section>
       <p className="text-xs font-mono text-[var(--color-text-muted)] uppercase tracking-widest mb-4">
@@ -70,4 +70,6 @@ const meta: Meta = {
 export default meta
 
 type Story = StoryObj
-export const Default: Story = {}
+export const Default: Story = {
+  name: 'Typography · Tipográfia',
+}

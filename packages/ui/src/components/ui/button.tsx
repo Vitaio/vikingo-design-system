@@ -17,26 +17,30 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: [
-          'bg-[var(--color-accent)] text-white',
-          'hover:bg-[var(--color-accent-hover)]',
-          'active:scale-[0.98]',
+          'bg-[var(--color-accent)] text-white shadow-[var(--shadow-sm)]',
+          'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-md)]',
+          'active:scale-[0.97] active:shadow-none',
         ].join(' '),
         secondary: [
           'bg-[var(--color-surface)] text-[var(--color-text)]',
-          'border border-[var(--color-border)]',
-          'hover:bg-[var(--color-bg)] hover:border-[var(--color-border-strong)]',
+          'border border-[var(--color-border)] shadow-[var(--shadow-sm)]',
+          'hover:bg-[var(--color-bg)] hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-md)]',
+          'active:scale-[0.97] active:shadow-none',
         ].join(' '),
         ghost: [
           'bg-transparent text-[var(--color-text)]',
           'hover:bg-[var(--color-accent-muted)] hover:text-[var(--color-accent)]',
+          'active:scale-[0.97]',
         ].join(' '),
         destructive: [
-          'bg-[var(--color-error)] text-white',
-          'hover:bg-[var(--color-error)]/90',
+          'bg-[var(--color-error)] text-white shadow-[var(--shadow-sm)]',
+          'hover:bg-[var(--color-error)]/90 hover:shadow-[var(--shadow-md)]',
+          'active:scale-[0.97] active:shadow-none',
         ].join(' '),
         outline: [
           'border border-[var(--color-accent)] text-[var(--color-accent)] bg-transparent',
-          'hover:bg-[var(--color-accent-muted)]',
+          'hover:bg-[var(--color-accent-muted)] hover:shadow-[var(--shadow-sm)]',
+          'active:scale-[0.97]',
         ].join(' '),
         link: [
           'text-[var(--color-accent)] underline-offset-4 hover:underline bg-transparent',

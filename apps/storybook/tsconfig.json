@@ -2,7 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "noEmit": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@vikingo/ui": ["../../packages/ui/src/index.ts"],
+      "@vikingo/ui/*": ["../../packages/ui/src/*"]
+    }
   },
   "include": [".storybook/**/*", "stories/**/*"]
 }

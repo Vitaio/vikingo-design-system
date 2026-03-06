@@ -98,12 +98,64 @@ const DashboardDemo = () => {
 }
 
 const meta: Meta = {
-  title: 'Layout/PageLayout',
+  title: 'Layout/Page Layout',
   component: DashboardDemo,
-  parameters: { layout: 'fullscreen' },
+  parameters: {
+    layout: 'fullscreen',
+    docs: { source: { type: 'code' } },
+  },
   tags: ['autodocs'],
 }
 export default meta
 
 type Story = StoryObj
-export const Default: Story = {}
+
+export const Default: Story = {
+  name: 'Default · Alapértelmezett',
+  render: () => <DashboardDemo />,
+  parameters: {
+    docs: {
+      source: {
+        code: `import { useState } from 'react'
+import { PageLayout, PageContent, Sidebar, Topbar, Logo, Button, Avatar, AvatarFallback } from '@vikingo/ui'
+import { LayoutDashboard, Bell } from 'lucide-react'
+
+const navSections = [
+  {
+    items: [
+      { label: 'Dashboard', href: '#', icon: <LayoutDashboard className="h-4 w-4" />, active: true },
+    ],
+  },
+]
+
+export function App() {
+  const [collapsed, setCollapsed] = useState(false)
+
+  return (
+    <PageLayout
+      sidebar={
+        <Sidebar
+          logo={<Logo variant="white" name="Vikingo" size="md" />}
+          logoCollapsed={<Logo variant="white" iconOnly size="sm" />}
+          sections={navSections}
+          collapsed={collapsed}
+          onCollapsedChange={setCollapsed}
+        />
+      }
+      topbar={
+        <Topbar
+          left={<h1 className="font-display font-semibold text-lg">Dashboard</h1>}
+          right={<Button variant="secondary" size="icon-sm"><Bell className="h-4 w-4" /></Button>}
+        />
+      }
+    >
+      <PageContent title="Dashboard" description="Üdvözöljük a vezérlőpultján.">
+        {/* tartalom */}
+      </PageContent>
+    </PageLayout>
+  )
+}`,
+      },
+    },
+  },
+}

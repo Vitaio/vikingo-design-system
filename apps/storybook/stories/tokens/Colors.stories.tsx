@@ -15,7 +15,7 @@ const ColorSwatch = ({ name, value, textColor = 'white' }: { name: string; value
 
 const ColorsShowcase = () => (
   <div className="p-8 bg-[var(--color-bg)] min-h-screen min-w-[800px]">
-    <h1 className="font-display font-semibold text-2xl text-[var(--color-text)] mb-8">Color Tokens</h1>
+    <h1 className="font-display font-semibold text-2xl text-[var(--color-text)] mb-8">Color Tokens · Színtokenek</h1>
 
     <section className="mb-8">
       <h2 className="font-body font-semibold text-sm text-[var(--color-text-muted)] uppercase tracking-widest mb-4">Brand</h2>
@@ -58,4 +58,6 @@ const meta: Meta = {
 export default meta
 
 type Story = StoryObj
-export const Default: Story = {}
+export const Default: Story = {
+  name: 'Color Tokens · Színtokenek',
+}

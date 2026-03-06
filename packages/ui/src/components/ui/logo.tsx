@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { cn } from '../../lib/utils'
 
+
+
 export interface LogoProps {
   /** 'white' for dark backgrounds (sidebar), 'dark' for light backgrounds */
   variant?: 'white' | 'dark'
@@ -49,11 +51,13 @@ function Logo({ variant = 'white', iconOnly = false, name = 'Vikingo', size = 'm
   }
   const s = sizeClasses[size]
 
+  const emblem = emblems[variant]
+
   return (
     <div className={cn('flex items-center', s.wrap, className)}>
-      <span className={cn('shrink-0', s.icon)}>
-        {emblems[variant]}
-      </span>
+      {React.cloneElement(emblem as React.ReactElement<React.SVGProps<SVGSVGElement>>, {
+        className: cn('shrink-0 block', s.icon),
+      })}
       {!iconOnly && (
         <span
           className={cn(

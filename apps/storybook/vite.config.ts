@@ -12,10 +12,22 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias: {
-      // In dev/Storybook, use source CSS directly (avoids dist font path issues)
-      '@vikingo/ui/styles': resolve(__dirname, '../../packages/ui/src/styles/globals.css'),
-      '@vikingo/ui/fonts': resolve(__dirname, '../../packages/ui/src/styles/fonts.css'),
-    },
+    alias: [
+      // Specifikus subpath alias-ok az általános elé kell kerüljenek
+      {
+        find: '@vikingo/ui/styles',
+        replacement: resolve(__dirname, '../../packages/ui/src/styles/globals.css'),
+      },
+      {
+        find: '@vikingo/ui/fonts',
+        replacement: resolve(__dirname, '../../packages/ui/src/styles/fonts.css'),
+      },
+      // TypeScript forrás közvetlen használata — elkerüli a dist externalization
+      // hibákat (recharts és más jövőbeli @vikingo/ui függőségek esetén)
+      {
+        find: '@vikingo/ui',
+        replacement: resolve(__dirname, '../../packages/ui/src/index.ts'),
+      },
+    ],
   },
 })

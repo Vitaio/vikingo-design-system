@@ -11,7 +11,11 @@ const Card = React.forwardRef<
       'bg-[var(--color-surface)] rounded-[var(--radius-lg)]',
       'border border-[var(--color-border)]',
       'shadow-[var(--shadow-sm)]',
-      hover && 'transition-shadow duration-[var(--transition-base)] hover:shadow-[var(--shadow-md)] cursor-pointer',
+      'transition-all duration-[var(--transition-base)]',
+      // Subtle hover for all cards
+      'hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-md)]',
+      // Extra lift for interactive cards
+      hover && 'cursor-pointer hover:-translate-y-0.5 hover:shadow-[var(--shadow-lg)] active:translate-y-0 active:shadow-[var(--shadow-md)]',
       className
     )}
     {...props}

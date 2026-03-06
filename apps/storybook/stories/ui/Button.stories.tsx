@@ -3,7 +3,7 @@ import { Download, Plus, Trash2 } from 'lucide-react'
 import { Button } from '@vikingo/ui'
 
 const meta: Meta<typeof Button> = {
-  title: 'UI/Button',
+  title: 'Forms/Button',
   component: Button,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
@@ -25,26 +25,32 @@ export default meta
 type Story = StoryObj<typeof Button>
 
 export const Primary: Story = {
+  name: 'Primary · Elsődleges',
   args: { children: 'Mentés', variant: 'primary' },
 }
 
 export const Secondary: Story = {
+  name: 'Secondary · Másodlagos',
   args: { children: 'Mégse', variant: 'secondary' },
 }
 
 export const Ghost: Story = {
+  name: 'Ghost · Áttetsző',
   args: { children: 'Szerkesztés', variant: 'ghost' },
 }
 
 export const Destructive: Story = {
+  name: 'Destructive · Veszélyes',
   args: { children: 'Törlés', variant: 'destructive' },
 }
 
 export const Loading: Story = {
+  name: 'Loading · Betöltés',
   args: { children: 'Mentés folyamatban', loading: true },
 }
 
 export const WithLeftIcon: Story = {
+  name: 'With Left Icon · Bal ikonnal',
   args: {
     children: 'Letöltés',
     leftIcon: <Download className="h-4 w-4" />,
@@ -52,6 +58,7 @@ export const WithLeftIcon: Story = {
 }
 
 export const WithRightIcon: Story = {
+  name: 'With Right Icon · Jobb ikonnal',
   args: {
     children: 'Új elem',
     rightIcon: <Plus className="h-4 w-4" />,
@@ -59,6 +66,7 @@ export const WithRightIcon: Story = {
 }
 
 export const AllVariants: Story = {
+  name: 'All Variants · Összes variáns',
   render: () => (
     <div className="flex flex-wrap items-center gap-3 p-4 bg-[var(--color-bg)]">
       <Button variant="primary">Primary</Button>
@@ -72,6 +80,7 @@ export const AllVariants: Story = {
 }
 
 export const AllSizes: Story = {
+  name: 'All Sizes · Összes méret',
   render: () => (
     <div className="flex flex-wrap items-end gap-3 p-4 bg-[var(--color-bg)]">
       <Button size="sm">Small</Button>
