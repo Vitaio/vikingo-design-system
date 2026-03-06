@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsup'
+import { copyFileSync, mkdirSync } from 'fs'
 
 export default defineConfig({
   entry: ['src/index.ts'],
@@ -10,8 +11,11 @@ export default defineConfig({
   external: ['react', 'react-dom'],
   treeshake: true,
   outDir: 'dist',
-  // Copy CSS files to dist
-  loader: {
-    '.css': 'copy',
+  async onSuccess() {
+    // Copy CSS files to dist so consumers can import '@vikingo/ui/styles'
+    mkdirSync('dist', { recursive: true })
+    copyFileSync('src/styles/globals.css', 'dist/globals.css')
+    copyFileSync('src/styles/fonts.css', 'dist/fonts.css')
+    console.log('✓ CSS files copied to dist/')
   },
 })
