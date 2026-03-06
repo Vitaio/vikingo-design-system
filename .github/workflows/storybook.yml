@@ -1,0 +1,49 @@
+name: Deploy Storybook to Vercel
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build UI package
+        run: pnpm --filter @vikingo/ui build
+
+      - name: Build Storybook
+        run: pnpm --filter @vikingo/storybook build-storybook
+
+      - name: Deploy to Vercel (preview)
+        if: github.ref != 'refs/heads/main'
+        run: vercel deploy apps/storybook/storybook-static --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy to Vercel (production)
+        if: github.ref == 'refs/heads/main'
+        run: vercel deploy apps/storybook/storybook-static --prod --token=${{ secrets.VERCEL_TOKEN }}
