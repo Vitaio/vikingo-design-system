@@ -14,7 +14,7 @@ This project uses the **Vikingo Design System** (`@vikingo/ui`).
 ## Available Components
 
 ### Forms
-`Button` `Input` `Textarea` `Select` `Checkbox` `Switch` `RadioGroup` `RadioButton` `Slider` `Chip` `ChipGroup` `DatePicker` `DateRangePicker` `SearchBar` `FileUpload` `Combobox` `Form` `FormField` `FormItem` `FormLabel` `FormControl` `FormDescription` `FormMessage`
+`Button` `Input` `NumberInput` `Textarea` `Select` `Checkbox` `Switch` `RadioGroup` `RadioButton` `Slider` `Chip` `ChipGroup` `DatePicker` `DateRangePicker` `SearchBar` `FileUpload` `Combobox` `CopyButton` `Form` `FormField` `FormItem` `FormLabel` `FormControl` `FormDescription` `FormMessage`
 
 ### Display
 `Avatar` `Badge` `Card` `Alert` `Progress` `Skeleton` `ImageCard` `Spinner` `Separator` `Carousel` `CarouselItem` `EmptyState` `Logo`
