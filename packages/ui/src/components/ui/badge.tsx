@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 
 const badgeVariants = cva(
@@ -11,7 +11,8 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-[var(--color-surface)] text-[var(--color-text)] border border-[var(--color-border)]',
+        default:
+          'bg-[var(--color-surface)] text-[var(--color-text)] border border-[var(--color-border)]',
         accent: 'bg-[var(--color-accent-muted)] text-[var(--color-accent)]',
         success: 'bg-[var(--color-success-muted)] text-[var(--color-success)]',
         warning: 'bg-[var(--color-warning-muted)] text-[var(--color-warning)]',
@@ -30,7 +31,7 @@ const badgeVariants = cva(
       variant: 'default',
       size: 'md',
     },
-  }
+  },
 )
 
 export interface BadgeProps
@@ -42,9 +43,7 @@ export interface BadgeProps
 function Badge({ className, variant, size, dot, children, ...props }: BadgeProps) {
   return (
     <span className={cn(badgeVariants({ variant, size, className }))} {...props}>
-      {dot && (
-        <span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true" />
-      )}
+      {dot && <span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true" />}
       {children}
     </span>
   )

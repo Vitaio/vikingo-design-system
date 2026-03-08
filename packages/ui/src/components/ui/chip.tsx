@@ -1,6 +1,6 @@
-import React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { X, Check } from 'lucide-react'
+import { Check, X } from 'lucide-react'
+import type React from 'react'
 import { cn } from '../../lib/utils'
 
 // ── Base chip variants ──────────────────────────────────────────────────────
@@ -67,7 +67,7 @@ const chipVariants = cva(
       selected: false,
       disabled: false,
     },
-  }
+  },
 )
 
 // ── Chip ────────────────────────────────────────────────────────────────────
@@ -100,7 +100,7 @@ export function Chip({
       onClick={onClick}
       className={cn(
         chipVariants({ variant, selected: selected ?? false, disabled: disabled ?? false }),
-        className
+        className,
       )}
       {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
@@ -129,7 +129,7 @@ export function Chip({
           className={cn(
             'ml-0.5 -mr-1 shrink-0 rounded-full p-0.5',
             'hover:bg-[var(--color-accent)]/20 transition-colors',
-            'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-accent)]'
+            'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-accent)]',
           )}
           aria-label="Eltávolítás"
         >
@@ -152,7 +152,7 @@ export function ChipGroup({ wrap = true, className, children, ...props }: ChipGr
       className={cn(
         'flex gap-2',
         wrap ? 'flex-wrap' : 'flex-nowrap overflow-x-auto scrollbar-none',
-        className
+        className,
       )}
       {...props}
     >

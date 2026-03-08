@@ -1,5 +1,6 @@
-import React, { useId, useState, useRef } from 'react'
-import { Search as SearchIcon, X, Loader2 } from 'lucide-react'
+import { Loader2, Search as SearchIcon, X } from 'lucide-react'
+import type React from 'react'
+import { useId, useRef, useState } from 'react'
 import { cn } from '../../lib/utils'
 
 // ── SearchResult type ───────────────────────────────────────────────────────
@@ -22,12 +23,15 @@ function HighlightText({ text, query }: { text: string; query: string }) {
     <>
       {parts.map((part, i) =>
         regex.test(part) ? (
-          <mark key={i} className="bg-[var(--color-accent-muted)] text-[var(--color-accent)] rounded-[2px] font-semibold not-italic">
+          <mark
+            key={i}
+            className="bg-[var(--color-accent-muted)] text-[var(--color-accent)] rounded-[2px] font-semibold not-italic"
+          >
             {part}
           </mark>
         ) : (
           <span key={i}>{part}</span>
-        )
+        ),
       )}
     </>
   )
@@ -35,7 +39,11 @@ function HighlightText({ text, query }: { text: string; query: string }) {
 
 // ── SearchBar ───────────────────────────────────────────────────────────────
 
-export interface SearchBarProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value' | 'size' | 'results'> {
+export interface SearchBarProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'onChange' | 'value' | 'size' | 'results'
+  > {
   value?: string
   defaultValue?: string
   onChange?: (value: string) => void
@@ -99,10 +107,10 @@ export function SearchBar({
     if (!results?.length) return
     if (e.key === 'ArrowDown') {
       e.preventDefault()
-      setActiveIndex(i => Math.min(i + 1, results.length - 1))
+      setActiveIndex((i) => Math.min(i + 1, results.length - 1))
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
-      setActiveIndex(i => Math.max(i - 1, 0))
+      setActiveIndex((i) => Math.max(i - 1, 0))
     } else if (e.key === 'Enter' && activeIndex >= 0) {
       e.preventDefault()
       onResultSelect?.(results[activeIndex])
@@ -149,11 +157,17 @@ export function SearchBar({
   return (
     <div className={cn('relative', className)}>
       {/* Search icon / spinner */}
-      <span className={cn('absolute top-1/2 -translate-y-1/2 pointer-events-none text-[var(--color-text-muted)]', iconOffsets[size])}>
-        {loading
-          ? <Loader2 className={cn(iconSizes[size], 'animate-spin text-[var(--color-accent)]')} />
-          : <SearchIcon className={iconSizes[size]} />
-        }
+      <span
+        className={cn(
+          'absolute top-1/2 -translate-y-1/2 pointer-events-none text-[var(--color-text-muted)]',
+          iconOffsets[size],
+        )}
+      >
+        {loading ? (
+          <Loader2 className={cn(iconSizes[size], 'animate-spin text-[var(--color-accent)]')} />
+        ) : (
+          <SearchIcon className={iconSizes[size]} />
+        )}
       </span>
 
       <input
@@ -167,8 +181,14 @@ export function SearchBar({
         value={currentValue}
         placeholder={placeholder}
         onChange={handleChange}
-        onFocus={(e) => { setFocused(true); onFocus?.(e) }}
-        onBlur={(e) => { setTimeout(() => setFocused(false), 150); onBlur?.(e) }}
+        onFocus={(e) => {
+          setFocused(true)
+          onFocus?.(e)
+        }}
+        onBlur={(e) => {
+          setTimeout(() => setFocused(false), 150)
+          onBlur?.(e)
+        }}
         onKeyDown={handleKeyDown}
         className={cn(
           'w-full bg-[var(--color-surface)] border border-[var(--color-border)]',
@@ -180,7 +200,7 @@ export function SearchBar({
           paddingRight[size],
           variant === 'bar' ? 'rounded-full' : 'rounded-[var(--radius-md)]',
           // Hide native clear button in webkit
-          '[&::-webkit-search-cancel-button]:appearance-none'
+          '[&::-webkit-search-cancel-button]:appearance-none',
         )}
         {...props}
       />
@@ -194,7 +214,7 @@ export function SearchBar({
           className={cn(
             'absolute top-1/2 -translate-y-1/2 right-3 text-[var(--color-text-muted)]',
             'hover:text-[var(--color-text)] transition-colors rounded-full p-0.5',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/40'
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/40',
           )}
         >
           <X className={iconSizes[size]} />
@@ -209,18 +229,19 @@ export function SearchBar({
             'absolute z-50 left-0 right-0 top-full mt-1',
             'rounded-[var(--radius-lg)] border border-[var(--color-border)]',
             'bg-[var(--color-surface)] shadow-[var(--shadow-lg)]',
-            'overflow-hidden'
+            'overflow-hidden',
           )}
         >
-          {results!.length === 0 ? (
+          {results?.length === 0 ? (
             <div className="px-3 py-4 text-center text-sm text-[var(--color-text-subtle)]">
               {emptyText}
             </div>
           ) : (
             (() => {
-              const grouped = results!.reduce<Record<string, SearchResult[]>>((acc, r) => {
+              const grouped = results?.reduce<Record<string, SearchResult[]>>((acc, r) => {
                 const cat = r.category ?? ''
-                ;(acc[cat] ??= []).push(r)
+                acc[cat] ??= []
+                acc[cat].push(r)
                 return acc
               }, {})
 
@@ -252,18 +273,22 @@ export function SearchBar({
                           'focus-visible:outline-none',
                           isActive
                             ? 'bg-[var(--color-accent-muted)] text-[var(--color-accent)]'
-                            : 'hover:bg-[var(--color-bg)] text-[var(--color-text)]'
+                            : 'hover:bg-[var(--color-bg)] text-[var(--color-text)]',
                         )}
                       >
                         {result.icon && (
-                          <span className="shrink-0 text-[var(--color-text-muted)]">{result.icon}</span>
+                          <span className="shrink-0 text-[var(--color-text-muted)]">
+                            {result.icon}
+                          </span>
                         )}
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium truncate">
                             <HighlightText text={result.label} query={currentValue} />
                           </p>
                           {result.description && (
-                            <p className="text-xs text-[var(--color-text-muted)] truncate">{result.description}</p>
+                            <p className="text-xs text-[var(--color-text-muted)] truncate">
+                              {result.description}
+                            </p>
                           )}
                         </div>
                       </button>

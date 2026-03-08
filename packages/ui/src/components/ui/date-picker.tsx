@@ -1,13 +1,23 @@
-import React, { useState, useId } from 'react'
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useId, useState } from 'react'
 import { cn } from '../../lib/utils'
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
 const MONTHS = [
-  'Január', 'Február', 'Március', 'Április', 'Május', 'Június',
-  'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December',
+  'Január',
+  'Február',
+  'Március',
+  'Április',
+  'Május',
+  'Június',
+  'Július',
+  'Augusztus',
+  'Szeptember',
+  'Október',
+  'November',
+  'December',
 ]
 
 const DAYS = ['H', 'K', 'Sz', 'Cs', 'P', 'Sz', 'V']
@@ -23,9 +33,11 @@ function getFirstDayOfMonth(year: number, month: number) {
 }
 
 function isSameDay(a: Date, b: Date) {
-  return a.getFullYear() === b.getFullYear() &&
+  return (
+    a.getFullYear() === b.getFullYear() &&
     a.getMonth() === b.getMonth() &&
     a.getDate() === b.getDate()
+  )
 }
 
 function formatDate(date: Date | null): string {
@@ -60,13 +72,17 @@ function CalendarGrid({ selected, onSelect, min, max }: CalendarGridProps) {
   const firstDay = getFirstDayOfMonth(viewYear, viewMonth)
 
   function prevMonth() {
-    if (viewMonth === 0) { setViewYear(y => y - 1); setViewMonth(11) }
-    else setViewMonth(m => m - 1)
+    if (viewMonth === 0) {
+      setViewYear((y) => y - 1)
+      setViewMonth(11)
+    } else setViewMonth((m) => m - 1)
   }
 
   function nextMonth() {
-    if (viewMonth === 11) { setViewYear(y => y + 1); setViewMonth(0) }
-    else setViewMonth(m => m + 1)
+    if (viewMonth === 11) {
+      setViewYear((y) => y + 1)
+      setViewMonth(0)
+    } else setViewMonth((m) => m + 1)
   }
 
   function isDisabled(day: number) {
@@ -110,7 +126,10 @@ function CalendarGrid({ selected, onSelect, min, max }: CalendarGridProps) {
       {/* Day headers */}
       <div className="grid grid-cols-7 mb-1">
         {DAYS.map((d, i) => (
-          <div key={i} className="h-8 flex items-center justify-center text-xs font-medium text-[var(--color-text-muted)]">
+          <div
+            key={i}
+            className="h-8 flex items-center justify-center text-xs font-medium text-[var(--color-text-muted)]"
+          >
             {d}
           </div>
         ))}
@@ -137,9 +156,9 @@ function CalendarGrid({ selected, onSelect, min, max }: CalendarGridProps) {
                 isSelected
                   ? 'bg-[var(--color-accent)] text-white font-semibold'
                   : isToday
-                  ? 'bg-[var(--color-accent-muted)] text-[var(--color-accent)] font-semibold'
-                  : 'text-[var(--color-text)] hover:bg-[var(--color-bg)]',
-                disabled && 'text-[var(--color-text-subtle)] pointer-events-none'
+                    ? 'bg-[var(--color-accent-muted)] text-[var(--color-accent)] font-semibold'
+                    : 'text-[var(--color-text)] hover:bg-[var(--color-bg)]',
+                disabled && 'text-[var(--color-text-subtle)] pointer-events-none',
               )}
             >
               {day}
@@ -204,10 +223,7 @@ export function DatePicker({
   return (
     <div className={cn('flex flex-col gap-1', className)}>
       {label && (
-        <label
-          htmlFor={id}
-          className="text-sm font-medium text-[var(--color-text)]"
-        >
+        <label htmlFor={id} className="text-sm font-medium text-[var(--color-text)]">
           {label}
         </label>
       )}
@@ -230,7 +246,7 @@ export function DatePicker({
               selected
                 ? 'bg-[var(--color-surface)] text-[var(--color-text)]'
                 : 'bg-[var(--color-surface)] text-[var(--color-text-subtle)]',
-              disabled && 'opacity-50 cursor-not-allowed bg-[var(--color-bg)]'
+              disabled && 'opacity-50 cursor-not-allowed bg-[var(--color-bg)]',
             )}
           >
             <span>{selected ? formatDate(selected) : placeholder}</span>
@@ -248,24 +264,21 @@ export function DatePicker({
               'data-[state=open]:animate-in data-[state=closed]:animate-out',
               'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
               'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-              'data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2'
+              'data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2',
             )}
           >
-            <CalendarGrid
-              selected={selected}
-              onSelect={handleSelect}
-              min={min}
-              max={max}
-            />
+            <CalendarGrid selected={selected} onSelect={handleSelect} min={min} max={max} />
           </PopoverPrimitive.Content>
         </PopoverPrimitive.Portal>
       </PopoverPrimitive.Root>
 
       {(hint || error) && (
-        <p className={cn(
-          'text-xs',
-          error ? 'text-[var(--color-error)]' : 'text-[var(--color-text-muted)]'
-        )}>
+        <p
+          className={cn(
+            'text-xs',
+            error ? 'text-[var(--color-error)]' : 'text-[var(--color-text-muted)]',
+          )}
+        >
           {error ?? hint}
         </p>
       )}
@@ -305,9 +318,7 @@ export function DateRangePicker({
     if (!range.from || (range.from && range.to)) {
       next = { from: date, to: null }
     } else {
-      next = date < range.from
-        ? { from: date, to: range.from }
-        : { from: range.from, to: date }
+      next = date < range.from ? { from: date, to: range.from } : { from: range.from, to: date }
       setOpen(false)
     }
     if (value === undefined) setInternal(next)
@@ -322,9 +333,7 @@ export function DateRangePicker({
 
   return (
     <div className={cn('flex flex-col gap-1', className)}>
-      {label && (
-        <label className="text-sm font-medium text-[var(--color-text)]">{label}</label>
-      )}
+      {label && <label className="text-sm font-medium text-[var(--color-text)]">{label}</label>}
       <PopoverPrimitive.Root open={open} onOpenChange={disabled ? undefined : setOpen}>
         <PopoverPrimitive.Trigger asChild>
           <button
@@ -336,7 +345,7 @@ export function DateRangePicker({
               'bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2',
               'focus-visible:ring-[var(--color-accent)]/20 focus-visible:border-[var(--color-accent)]',
               range.from ? 'text-[var(--color-text)]' : 'text-[var(--color-text-subtle)]',
-              disabled && 'opacity-50 cursor-not-allowed'
+              disabled && 'opacity-50 cursor-not-allowed',
             )}
           >
             <span className="font-mono text-xs">{displayText}</span>
@@ -381,13 +390,17 @@ function RangeCalendarGrid({
   const firstDay = getFirstDayOfMonth(viewYear, viewMonth)
 
   function prevMonth() {
-    if (viewMonth === 0) { setViewYear(y => y - 1); setViewMonth(11) }
-    else setViewMonth(m => m - 1)
+    if (viewMonth === 0) {
+      setViewYear((y) => y - 1)
+      setViewMonth(11)
+    } else setViewMonth((m) => m - 1)
   }
 
   function nextMonth() {
-    if (viewMonth === 11) { setViewYear(y => y + 1); setViewMonth(0) }
-    else setViewMonth(m => m + 1)
+    if (viewMonth === 11) {
+      setViewYear((y) => y + 1)
+      setViewMonth(0)
+    } else setViewMonth((m) => m + 1)
   }
 
   const cells: (number | null)[] = [
@@ -407,19 +420,32 @@ function RangeCalendarGrid({
   return (
     <div className="p-3 w-[280px]">
       <div className="flex items-center justify-between mb-3">
-        <button type="button" onClick={prevMonth} className="h-7 w-7 rounded-[var(--radius-md)] flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-bg)] transition-colors">
+        <button
+          type="button"
+          onClick={prevMonth}
+          className="h-7 w-7 rounded-[var(--radius-md)] flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-bg)] transition-colors"
+        >
           <ChevronLeft className="h-4 w-4" />
         </button>
         <span className="text-sm font-semibold text-[var(--color-text)] font-display">
           {viewYear}. {MONTHS[viewMonth]}
         </span>
-        <button type="button" onClick={nextMonth} className="h-7 w-7 rounded-[var(--radius-md)] flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-bg)] transition-colors">
+        <button
+          type="button"
+          onClick={nextMonth}
+          className="h-7 w-7 rounded-[var(--radius-md)] flex items-center justify-center text-[var(--color-text-muted)] hover:bg-[var(--color-bg)] transition-colors"
+        >
           <ChevronRight className="h-4 w-4" />
         </button>
       </div>
       <div className="grid grid-cols-7 mb-1">
         {DAYS.map((d, i) => (
-          <div key={i} className="h-8 flex items-center justify-center text-xs font-medium text-[var(--color-text-muted)]">{d}</div>
+          <div
+            key={i}
+            className="h-8 flex items-center justify-center text-xs font-medium text-[var(--color-text-muted)]"
+          >
+            {d}
+          </div>
         ))}
       </div>
       <div className="grid grid-cols-7 gap-y-0.5">
@@ -440,13 +466,13 @@ function RangeCalendarGrid({
               className={cn(
                 'h-8 w-full text-sm transition-colors',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/40',
-                (isFrom || isTo)
+                isFrom || isTo
                   ? 'rounded-[var(--radius-md)] bg-[var(--color-accent)] text-white font-semibold'
                   : inRange
-                  ? 'bg-[var(--color-accent-muted)] text-[var(--color-accent)] rounded-none'
-                  : isToday
-                  ? 'rounded-[var(--radius-md)] bg-[var(--color-accent-muted)] text-[var(--color-accent)] font-semibold'
-                  : 'rounded-[var(--radius-md)] text-[var(--color-text)] hover:bg-[var(--color-bg)]'
+                    ? 'bg-[var(--color-accent-muted)] text-[var(--color-accent)] rounded-none'
+                    : isToday
+                      ? 'rounded-[var(--radius-md)] bg-[var(--color-accent-muted)] text-[var(--color-accent)] font-semibold'
+                      : 'rounded-[var(--radius-md)] text-[var(--color-text)] hover:bg-[var(--color-bg)]',
               )}
             >
               {day}

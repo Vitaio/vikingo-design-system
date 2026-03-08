@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { Menu } from 'lucide-react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 import { usePageLayout } from './page-layout-context'
 
@@ -19,7 +19,7 @@ function Topbar({ left, right, className, children, ...props }: TopbarProps) {
         'bg-[var(--topbar-bg)]',
         'border-b border-[var(--topbar-border)]',
         'shrink-0',
-        className
+        className,
       )}
       {...props}
     >
@@ -35,7 +35,7 @@ function Topbar({ left, right, className, children, ...props }: TopbarProps) {
               'text-[var(--color-text-muted)] hover:text-[var(--color-text)]',
               'hover:bg-[var(--color-border)]/40',
               'transition-colors duration-[var(--transition-fast)]',
-              'shrink-0'
+              'shrink-0',
             )}
             aria-label="Navigáció megnyitása"
           >
@@ -44,9 +44,7 @@ function Topbar({ left, right, className, children, ...props }: TopbarProps) {
         )}
         {left}
       </div>
-      <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-        {right ?? children}
-      </div>
+      <div className="flex items-center gap-2 sm:gap-3 shrink-0">{right ?? children}</div>
     </header>
   )
 }

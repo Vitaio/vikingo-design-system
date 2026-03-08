@@ -17,7 +17,9 @@ function PageLayout({ sidebar, topbar, children, className }: PageLayoutProps) {
 
   React.useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)')
-    const handler = (e: MediaQueryListEvent) => { if (e.matches) setMobileOpen(false) }
+    const handler = (e: MediaQueryListEvent) => {
+      if (e.matches) setMobileOpen(false)
+    }
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
   }, [])
@@ -26,17 +28,14 @@ function PageLayout({ sidebar, topbar, children, className }: PageLayoutProps) {
     <PageLayoutContext.Provider value={{ openMobileMenu: () => setMobileOpen(true) }}>
       <TooltipProvider delayDuration={300}>
         <div className={cn('flex h-screen w-full overflow-hidden', className)}>
-
           {/* Desktop sidebar – hidden on mobile */}
-          <div className="hidden md:flex flex-none h-full">
-            {sidebar}
-          </div>
+          <div className="hidden md:flex flex-none h-full">{sidebar}</div>
 
           {/* Mobile overlay + slide-in drawer */}
           <div
             className={cn(
               'fixed inset-0 z-50 md:hidden',
-              mobileOpen ? 'pointer-events-auto' : 'pointer-events-none'
+              mobileOpen ? 'pointer-events-auto' : 'pointer-events-none',
             )}
           >
             {/* Backdrop */}
@@ -44,7 +43,7 @@ function PageLayout({ sidebar, topbar, children, className }: PageLayoutProps) {
               className={cn(
                 'absolute inset-0 bg-black/60 backdrop-blur-sm',
                 'transition-opacity duration-[var(--transition-slow)]',
-                mobileOpen ? 'opacity-100' : 'opacity-0'
+                mobileOpen ? 'opacity-100' : 'opacity-0',
               )}
               onClick={() => setMobileOpen(false)}
             />
@@ -53,7 +52,7 @@ function PageLayout({ sidebar, topbar, children, className }: PageLayoutProps) {
               className={cn(
                 'relative flex flex-none h-full',
                 'transition-transform duration-[var(--transition-slow)]',
-                mobileOpen ? 'translate-x-0' : '-translate-x-full'
+                mobileOpen ? 'translate-x-0' : '-translate-x-full',
               )}
             >
               {sidebar}
@@ -63,11 +62,8 @@ function PageLayout({ sidebar, topbar, children, className }: PageLayoutProps) {
           {/* Main content */}
           <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
             {topbar && <div className="flex-none">{topbar}</div>}
-            <main className="flex-1 overflow-y-auto bg-[var(--color-bg)]">
-              {children}
-            </main>
+            <main className="flex-1 overflow-y-auto bg-[var(--color-bg)]">{children}</main>
           </div>
-
         </div>
       </TooltipProvider>
     </PageLayoutContext.Provider>
@@ -80,7 +76,14 @@ export interface PageContentProps extends React.HTMLAttributes<HTMLDivElement> {
   actions?: React.ReactNode
 }
 
-function PageContent({ title, description, actions, children, className, ...props }: PageContentProps) {
+function PageContent({
+  title,
+  description,
+  actions,
+  children,
+  className,
+  ...props
+}: PageContentProps) {
   return (
     <div className={cn('p-4 sm:p-6 max-w-screen-2xl mx-auto', className)} {...props}>
       {(title || actions) && (
@@ -95,9 +98,7 @@ function PageContent({ title, description, actions, children, className, ...prop
               <p className="mt-1 text-sm text-[var(--color-text-muted)]">{description}</p>
             )}
           </div>
-          {actions && (
-            <div className="flex items-center gap-3 shrink-0">{actions}</div>
-          )}
+          {actions && <div className="flex items-center gap-3 shrink-0">{actions}</div>}
         </div>
       )}
       {children}

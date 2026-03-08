@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { Clock } from 'lucide-react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 
 export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -30,7 +30,7 @@ function PageHeader({
       className={cn(
         'flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between',
         'pb-6 mb-6 border-b border-[var(--color-border)]',
-        className
+        className,
       )}
       {...props}
     >

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 import { Badge } from './badge'
 
@@ -46,12 +46,14 @@ function ImageCard({
         'shadow-[var(--shadow-sm)]',
         'transition-shadow duration-[var(--transition-base)]',
         'hover:shadow-[var(--shadow-md)]',
-        className
+        className,
       )}
       {...props}
     >
       {/* Image */}
-      <div className={cn('relative overflow-hidden bg-[var(--color-bg)]', aspectClasses[aspectRatio])}>
+      <div
+        className={cn('relative overflow-hidden bg-[var(--color-bg)]', aspectClasses[aspectRatio])}
+      >
         <img
           src={src}
           alt={alt}
@@ -59,7 +61,9 @@ function ImageCard({
         />
         {badge && (
           <div className="absolute top-2 left-2">
-            <Badge variant={badgeVariant} size="sm">{badge}</Badge>
+            <Badge variant={badgeVariant} size="sm">
+              {badge}
+            </Badge>
           </div>
         )}
         {actions && (
@@ -83,7 +87,9 @@ function ImageCard({
           {tags && tags.length > 0 && (
             <div className="flex flex-wrap gap-1">
               {tags.map((tag) => (
-                <Badge key={tag} variant="default" size="sm">{tag}</Badge>
+                <Badge key={tag} variant="default" size="sm">
+                  {tag}
+                </Badge>
               ))}
             </div>
           )}

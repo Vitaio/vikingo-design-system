@@ -1,18 +1,17 @@
 'use client'
 
-import * as React from 'react'
 import {
-  LineChart as RechartsLineChart,
+  CartesianGrid,
+  Legend,
   Line,
+  LineChart as RechartsLineChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
 } from 'recharts'
 import { cn } from '../../lib/utils'
-import { formatDatumRovid, formatAxisY } from './chart-utils'
+import { formatAxisY, formatDatumRovid } from './chart-utils'
 
 export interface LineConfig {
   dataKey: string
@@ -78,7 +77,11 @@ function MultiLineChart({
           <CartesianGrid strokeDasharray="4 4" stroke="var(--color-border)" vertical={false} />
           <XAxis
             dataKey="xLabel"
-            tick={{ fontSize: 10, fill: 'var(--color-text-subtle)', fontFamily: 'var(--font-mono)' }}
+            tick={{
+              fontSize: 10,
+              fill: 'var(--color-text-subtle)',
+              fontFamily: 'var(--font-mono)',
+            }}
             axisLine={false}
             tickLine={false}
             tickMargin={8}
@@ -88,7 +91,11 @@ function MultiLineChart({
             yAxisId="left"
             orientation="left"
             tickFormatter={leftTickFormatter}
-            tick={{ fontSize: 10, fill: 'var(--color-text-subtle)', fontFamily: 'var(--font-mono)' }}
+            tick={{
+              fontSize: 10,
+              fill: 'var(--color-text-subtle)',
+              fontFamily: 'var(--font-mono)',
+            }}
             axisLine={false}
             tickLine={false}
             width={40}
@@ -98,7 +105,11 @@ function MultiLineChart({
               yAxisId="right"
               orientation="right"
               tickFormatter={rightTickFormatter}
-              tick={{ fontSize: 10, fill: 'var(--color-text-subtle)', fontFamily: 'var(--font-mono)' }}
+              tick={{
+                fontSize: 10,
+                fill: 'var(--color-text-subtle)',
+                fontFamily: 'var(--font-mono)',
+              }}
               axisLine={false}
               tickLine={false}
               width={40}
@@ -142,9 +153,7 @@ function MultiLineChart({
             iconType="circle"
             iconSize={8}
             wrapperStyle={{ fontSize: 11, fontFamily: 'var(--font-mono)', paddingTop: 8 }}
-            formatter={(value) => (
-              <span style={{ color: 'var(--color-text-muted)' }}>{value}</span>
-            )}
+            formatter={(value) => <span style={{ color: 'var(--color-text-muted)' }}>{value}</span>}
           />
           {lines.map((line) => (
             <Line

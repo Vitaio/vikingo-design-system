@@ -1,5 +1,5 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { cn } from '../../lib/utils'
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -71,7 +71,7 @@ export function Carousel({
       }
       setActiveIndex(clamped)
     },
-    [count, gap, getItemWidth, itemsPerView, loop]
+    [count, gap, getItemWidth, itemsPerView, loop],
   )
 
   // Sync dots/arrows on scroll
@@ -98,19 +98,27 @@ export function Carousel({
   useEffect(() => {
     if (!autoplay) return
     autoplayRef.current = setInterval(() => {
-      setActiveIndex(i => {
+      setActiveIndex((i) => {
         const next = loop ? (i + 1) % count : Math.min(i + 1, count - 1)
         scrollToIndex(next)
         return next
       })
     }, autoplay)
-    return () => { if (autoplayRef.current) clearInterval(autoplayRef.current) }
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current)
+    }
   }, [autoplay, loop, count, scrollToIndex])
 
   // Keyboard navigation
   function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToIndex(activeIndex - 1) }
-    if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(activeIndex + 1) }
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+      scrollToIndex(activeIndex - 1)
+    }
+    if (e.key === 'ArrowRight') {
+      e.preventDefault()
+      scrollToIndex(activeIndex + 1)
+    }
   }
 
   // Touch/swipe
@@ -142,7 +150,7 @@ export function Carousel({
     <div
       className={cn('relative group/carousel', className)}
       onKeyDown={handleKeyDown}
-      tabIndex={0}
+      role="region"
       aria-roledescription="carousel"
       style={{ outline: 'none' }}
       {...props}
@@ -175,7 +183,7 @@ export function Carousel({
               'opacity-0 group-hover/carousel:opacity-100',
               'hover:bg-[var(--color-bg)] hover:scale-105 active:scale-95',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/40',
-              (!loop && !canPrev) && 'opacity-0 pointer-events-none'
+              !loop && !canPrev && 'opacity-0 pointer-events-none',
             )}
           >
             <ChevronLeft className="h-4 w-4" />
@@ -195,7 +203,7 @@ export function Carousel({
               'opacity-0 group-hover/carousel:opacity-100',
               'hover:bg-[var(--color-bg)] hover:scale-105 active:scale-95',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/40',
-              (!loop && !canNext) && 'opacity-0 pointer-events-none'
+              !loop && !canNext && 'opacity-0 pointer-events-none',
             )}
           >
             <ChevronRight className="h-4 w-4" />
@@ -217,7 +225,7 @@ export function Carousel({
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/40',
                 i === activeIndex
                   ? 'w-5 h-2 bg-[var(--color-accent)]'
-                  : 'w-2 h-2 bg-[var(--color-border-strong)] hover:bg-[var(--color-text-muted)]'
+                  : 'w-2 h-2 bg-[var(--color-border-strong)] hover:bg-[var(--color-text-muted)]',
               )}
             />
           ))}

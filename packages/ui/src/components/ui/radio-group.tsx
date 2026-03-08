@@ -1,16 +1,12 @@
-import * as React from 'react'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
+import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 >(({ className, ...props }, ref) => (
-  <RadioGroupPrimitive.Root
-    className={cn('grid gap-2', className)}
-    {...props}
-    ref={ref}
-  />
+  <RadioGroupPrimitive.Root className={cn('grid gap-2', className)} {...props} ref={ref} />
 ))
 RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
 
@@ -29,7 +25,7 @@ const RadioGroupItem = React.forwardRef<
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2',
       'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-[var(--color-border-strong)] disabled:hover:bg-transparent',
       'data-[state=checked]:border-[var(--color-accent)]',
-      className
+      className,
     )}
     {...props}
   >
@@ -52,18 +48,11 @@ const RadioButton = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioButtonProps
 >(({ label, description, className, id, ...props }, ref) => {
-  const itemId = id ?? React.useId()
+  const generatedId = React.useId()
+  const itemId = id ?? generatedId
   return (
-    <label
-      htmlFor={itemId}
-      className="flex items-center gap-3 cursor-pointer group"
-    >
-      <RadioGroupItem
-        ref={ref}
-        id={itemId}
-        className={className}
-        {...props}
-      />
+    <label htmlFor={itemId} className="flex items-center gap-3 cursor-pointer group">
+      <RadioGroupItem ref={ref} id={itemId} className={className} {...props} />
       {(label || description) && (
         <div className="flex flex-col gap-0.5 min-w-0">
           {label && (
@@ -72,9 +61,7 @@ const RadioButton = React.forwardRef<
             </span>
           )}
           {description && (
-            <span className="text-xs text-[var(--color-text-muted)]">
-              {description}
-            </span>
+            <span className="text-xs text-[var(--color-text-muted)]">{description}</span>
           )}
         </div>
       )}

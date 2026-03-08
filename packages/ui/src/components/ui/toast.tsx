@@ -1,7 +1,7 @@
 'use client'
 
+import { AlertTriangle, CheckCircle2, Info, XCircle } from 'lucide-react'
 import { Toaster as SonnerToaster } from 'sonner'
-import { CheckCircle2, XCircle, AlertTriangle, Info } from 'lucide-react'
 
 export function Toaster() {
   return (
@@ -21,8 +21,10 @@ export function Toaster() {
           toast: 'vikingo-toast',
           title: 'font-semibold',
           description: 'text-[var(--color-text-muted)] text-xs mt-0.5',
-          actionButton: 'bg-[var(--color-accent)] text-white text-xs px-3 py-1 rounded-[var(--radius-sm)] font-medium hover:bg-[var(--color-accent-hover)] transition-colors',
-          cancelButton: 'bg-[var(--color-bg)] text-[var(--color-text-muted)] text-xs px-3 py-1 rounded-[var(--radius-sm)] font-medium hover:text-[var(--color-text)] transition-colors',
+          actionButton:
+            'bg-[var(--color-accent)] text-white text-xs px-3 py-1 rounded-[var(--radius-sm)] font-medium hover:bg-[var(--color-accent-hover)] transition-colors',
+          cancelButton:
+            'bg-[var(--color-bg)] text-[var(--color-text-muted)] text-xs px-3 py-1 rounded-[var(--radius-sm)] font-medium hover:text-[var(--color-text)] transition-colors',
           closeButton: 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]',
         },
       }}

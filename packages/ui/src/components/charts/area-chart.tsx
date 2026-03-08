@@ -2,16 +2,16 @@
 
 import * as React from 'react'
 import {
-  AreaChart as RechartsAreaChart,
   Area,
+  CartesianGrid,
+  AreaChart as RechartsAreaChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
 } from 'recharts'
 import { cn } from '../../lib/utils'
-import { formatDatumRovid, formatAxisY } from './chart-utils'
+import { formatAxisY, formatDatumRovid } from './chart-utils'
 
 export interface AreaChartDataPoint {
   x: string
@@ -60,14 +60,14 @@ function AreaChart({
             </linearGradient>
           </defs>
 
-          <CartesianGrid
-            strokeDasharray="4 4"
-            stroke="var(--color-border)"
-            vertical={false}
-          />
+          <CartesianGrid strokeDasharray="4 4" stroke="var(--color-border)" vertical={false} />
           <XAxis
             dataKey="xLabel"
-            tick={{ fontSize: 10, fill: 'var(--color-text-subtle)', fontFamily: 'var(--font-mono)' }}
+            tick={{
+              fontSize: 10,
+              fill: 'var(--color-text-subtle)',
+              fontFamily: 'var(--font-mono)',
+            }}
             axisLine={false}
             tickLine={false}
             tickMargin={8}
@@ -75,7 +75,11 @@ function AreaChart({
           />
           <YAxis
             tickFormatter={tickFormatter}
-            tick={{ fontSize: 10, fill: 'var(--color-text-subtle)', fontFamily: 'var(--font-mono)' }}
+            tick={{
+              fontSize: 10,
+              fill: 'var(--color-text-subtle)',
+              fontFamily: 'var(--font-mono)',
+            }}
             axisLine={false}
             tickLine={false}
             width={40}
@@ -90,7 +94,10 @@ function AreaChart({
                 <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-md)] shadow-[var(--shadow-md)] px-3 py-2.5 text-xs">
                   <p className="font-mono text-[var(--color-text-muted)] mb-2">{date}</p>
                   <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: color }} />
+                    <span
+                      className="h-2 w-2 rounded-full shrink-0"
+                      style={{ backgroundColor: color }}
+                    />
                     {seriesLabel && (
                       <span className="text-[var(--color-text-muted)]">{seriesLabel}:</span>
                     )}

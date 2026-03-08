@@ -1,6 +1,6 @@
-import * as React from 'react'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 const Tabs = TabsPrimitive.Root
@@ -41,7 +41,7 @@ const TabsList = React.forwardRef<
       if (typeof ref === 'function') ref(node)
       else if (ref) ref.current = node
     },
-    [ref]
+    [ref],
   )
 
   return (
@@ -70,10 +70,8 @@ const TabsList = React.forwardRef<
             'border border-[var(--color-border)] p-1 gap-1',
           ],
           variant === 'pills' && 'gap-1',
-          variant === 'underline' && [
-            'border-b border-[var(--color-border)] gap-0',
-          ],
-          className
+          variant === 'underline' && ['border-b border-[var(--color-border)] gap-0'],
+          className,
         )}
         data-variant={variant}
         {...props}
@@ -119,7 +117,7 @@ const TabsTrigger = React.forwardRef<
       '[.tabs-underline_&]:rounded-none [.tabs-underline_&]:border-b-2 [.tabs-underline_&]:border-transparent',
       '[.tabs-underline_&[data-state=active]]:border-[var(--color-accent)] [.tabs-underline_&[data-state=active]]:text-[var(--color-accent)]',
       '[.tabs-underline_&[data-state=active]]:bg-transparent [.tabs-underline_&[data-state=active]]:shadow-none',
-      className
+      className,
     )}
     {...props}
   />
@@ -134,7 +132,7 @@ const TabsContent = React.forwardRef<
     ref={ref}
     className={cn(
       'mt-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
-      className
+      className,
     )}
     {...props}
   />

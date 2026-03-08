@@ -1,18 +1,17 @@
 'use client'
 
-import * as React from 'react'
 import {
-  BarChart as RechartsBarChart,
   Bar,
+  CartesianGrid,
+  Legend,
+  BarChart as RechartsBarChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
 } from 'recharts'
 import { cn } from '../../lib/utils'
-import { formatDatumRovid, formatAxisY } from './chart-utils'
+import { formatAxisY, formatDatumRovid } from './chart-utils'
 
 export interface BarConfig {
   dataKey: string
@@ -59,7 +58,11 @@ function MultiBarChart({
           <CartesianGrid strokeDasharray="4 4" stroke="var(--color-border)" vertical={false} />
           <XAxis
             dataKey="xLabel"
-            tick={{ fontSize: 10, fill: 'var(--color-text-subtle)', fontFamily: 'var(--font-mono)' }}
+            tick={{
+              fontSize: 10,
+              fill: 'var(--color-text-subtle)',
+              fontFamily: 'var(--font-mono)',
+            }}
             axisLine={false}
             tickLine={false}
             tickMargin={8}
@@ -67,7 +70,11 @@ function MultiBarChart({
           />
           <YAxis
             tickFormatter={tickFormatter}
-            tick={{ fontSize: 10, fill: 'var(--color-text-subtle)', fontFamily: 'var(--font-mono)' }}
+            tick={{
+              fontSize: 10,
+              fill: 'var(--color-text-subtle)',
+              fontFamily: 'var(--font-mono)',
+            }}
             axisLine={false}
             tickLine={false}
             width={40}
@@ -103,9 +110,7 @@ function MultiBarChart({
             iconType="circle"
             iconSize={8}
             wrapperStyle={{ fontSize: 11, fontFamily: 'var(--font-mono)', paddingTop: 8 }}
-            formatter={(value) => (
-              <span style={{ color: 'var(--color-text-muted)' }}>{value}</span>
-            )}
+            formatter={(value) => <span style={{ color: 'var(--color-text-muted)' }}>{value}</span>}
           />
           {bars.map((bar) => (
             <Bar

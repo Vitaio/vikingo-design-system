@@ -1,7 +1,7 @@
-import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { Loader2 } from 'lucide-react'
+import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 const buttonVariants = cva(
@@ -42,9 +42,9 @@ const buttonVariants = cva(
           'hover:bg-[var(--color-accent-muted)] hover:shadow-[var(--shadow-sm)]',
           'btn-press',
         ].join(' '),
-        link: [
-          'text-[var(--color-accent)] underline-offset-4 hover:underline bg-transparent',
-        ].join(' '),
+        link: ['text-[var(--color-accent)] underline-offset-4 hover:underline bg-transparent'].join(
+          ' ',
+        ),
       },
       size: {
         sm: 'h-8 px-3 text-sm',
@@ -59,7 +59,7 @@ const buttonVariants = cva(
       variant: 'primary',
       size: 'md',
     },
-  }
+  },
 )
 
 export interface ButtonProps
@@ -72,7 +72,21 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, loading, leftIcon, rightIcon, children, disabled, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      loading,
+      leftIcon,
+      rightIcon,
+      children,
+      disabled,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : 'button'
     return (
       <Comp
@@ -87,12 +101,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <span className="flex items-center">{leftIcon}</span>
         ) : null}
         {children}
-        {!loading && rightIcon && (
-          <span className="flex items-center">{rightIcon}</span>
-        )}
+        {!loading && rightIcon && <span className="flex items-center">{rightIcon}</span>}
       </Comp>
     )
-  }
+  },
 )
 Button.displayName = 'Button'
 

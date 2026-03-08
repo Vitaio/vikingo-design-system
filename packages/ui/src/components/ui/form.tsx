@@ -1,14 +1,14 @@
+import * as LabelPrimitive from '@radix-ui/react-label'
+import { Slot } from '@radix-ui/react-slot'
 import * as React from 'react'
 import {
-  useFormContext,
   Controller,
-  FormProvider,
   type ControllerProps,
   type FieldPath,
   type FieldValues,
+  FormProvider,
+  useFormContext,
 } from 'react-hook-form'
-import * as LabelPrimitive from '@radix-ui/react-label'
-import { Slot } from '@radix-ui/react-slot'
 import { cn } from '../../lib/utils'
 
 // ── Form = FormProvider wrapper ──────────────────────────────────────────────
@@ -24,9 +24,7 @@ type FormFieldContextValue<
   name: TName
 }
 
-const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue
-)
+const FormFieldContext = React.createContext<FormFieldContextValue>({} as FormFieldContextValue)
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
@@ -67,9 +65,7 @@ const useFormField = () => {
 
 type FormItemContextValue = { id: string }
 
-const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
-)
+const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue)
 
 const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
@@ -79,40 +75,40 @@ const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
         <div ref={ref} className={cn('flex flex-col gap-1.5', className)} {...props} />
       </FormItemContext.Provider>
     )
-  }
+  },
 )
 FormItem.displayName = 'FormItem'
 
 // ── FormLabel ─────────────────────────────────────────────────────────────────
 
-export interface FormLabelProps
-  extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
+export interface FormLabelProps extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
   required?: boolean
 }
 
-const FormLabel = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive.Root>,
-  FormLabelProps
->(({ className, required, children, ...props }, ref) => {
-  const { error, formItemId } = useFormField()
-  return (
-    <LabelPrimitive.Root
-      ref={ref}
-      htmlFor={formItemId}
-      className={cn(
-        'text-sm font-medium text-[var(--color-text)]',
-        error && 'text-[var(--color-error)]',
-        className
-      )}
-      {...props}
-    >
-      {children}
-      {required && (
-        <span className="text-[var(--color-error)] ml-0.5" aria-hidden="true">*</span>
-      )}
-    </LabelPrimitive.Root>
-  )
-})
+const FormLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive.Root>, FormLabelProps>(
+  ({ className, required, children, ...props }, ref) => {
+    const { error, formItemId } = useFormField()
+    return (
+      <LabelPrimitive.Root
+        ref={ref}
+        htmlFor={formItemId}
+        className={cn(
+          'text-sm font-medium text-[var(--color-text)]',
+          error && 'text-[var(--color-error)]',
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        {required && (
+          <span className="text-[var(--color-error)] ml-0.5" aria-hidden="true">
+            *
+          </span>
+        )}
+      </LabelPrimitive.Root>
+    )
+  },
+)
 FormLabel.displayName = 'FormLabel'
 
 // ── FormControl ───────────────────────────────────────────────────────────────
@@ -126,11 +122,7 @@ const FormControl = React.forwardRef<
     <Slot
       ref={ref}
       id={formItemId}
-      aria-describedby={
-        error
-          ? `${formDescriptionId} ${formMessageId}`
-          : formDescriptionId
-      }
+      aria-describedby={error ? `${formDescriptionId} ${formMessageId}` : formDescriptionId}
       aria-invalid={!!error}
       {...props}
     />

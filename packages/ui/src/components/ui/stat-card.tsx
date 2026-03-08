@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { TrendingUp, TrendingDown, Minus, Info } from 'lucide-react'
+import { Info, Minus, TrendingDown, TrendingUp } from 'lucide-react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
 
@@ -46,7 +46,7 @@ function StatCard({
         'p-5 flex flex-col gap-3',
         'transition-all duration-[var(--transition-base)]',
         'hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-md)]',
-        className
+        className,
       )}
       {...props}
     >
@@ -74,9 +74,7 @@ function StatCard({
           )}
         </div>
         {icon && (
-          <span className="shrink-0 text-[var(--color-text-subtle)] flex items-center">
-            {icon}
-          </span>
+          <span className="shrink-0 text-[var(--color-text-subtle)] flex items-center">{icon}</span>
         )}
       </div>
 
@@ -90,19 +88,25 @@ function StatCard({
           {/* Fő érték – DM Sans 700, nem Clash Display */}
           <div className="flex items-baseline gap-1 min-w-0">
             {prefix && (
-              <span className="text-sm text-[var(--color-text-muted)] font-mono shrink-0">{prefix}</span>
+              <span className="text-sm text-[var(--color-text-muted)] font-mono shrink-0">
+                {prefix}
+              </span>
             )}
             <span className="font-body font-bold text-xl sm:text-2xl text-[var(--color-text)] tracking-tight tabular-nums truncate">
               {value}
             </span>
             {suffix && (
-              <span className="text-sm text-[var(--color-text-muted)] font-mono shrink-0">{suffix}</span>
+              <span className="text-sm text-[var(--color-text-muted)] font-mono shrink-0">
+                {suffix}
+              </span>
             )}
           </div>
 
           {/* Másodlagos érték */}
           {sublabel && (
-            <p className="text-xs text-[var(--color-text-muted)] font-mono -mt-1 truncate">{sublabel}</p>
+            <p className="text-xs text-[var(--color-text-muted)] font-mono -mt-1 truncate">
+              {sublabel}
+            </p>
           )}
 
           {/* Trend badge */}
@@ -114,7 +118,7 @@ function StatCard({
                   'text-xs font-mono font-medium shrink-0',
                   trendPositive && 'bg-[var(--color-success-muted)] text-[var(--color-success)]',
                   trendNegative && 'bg-[var(--color-error-muted)] text-[var(--color-error)]',
-                  trendNeutral && 'bg-[var(--color-border)] text-[var(--color-text-muted)]'
+                  trendNeutral && 'bg-[var(--color-border)] text-[var(--color-text-muted)]',
                 )}
               >
                 {trendPositive && <TrendingUp className="h-3 w-3" />}

@@ -1,6 +1,6 @@
-import * as React from 'react'
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
 import { Check, ChevronRight, Circle } from 'lucide-react'
+import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 const DropdownMenu = DropdownMenuPrimitive.Root
@@ -24,7 +24,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
       'focus:bg-[var(--color-accent-muted)] focus:text-[var(--color-accent)]',
       'data-[state=open]:bg-[var(--color-accent-muted)]',
       inset && 'pl-8',
-      className
+      className,
     )}
     {...props}
   >
@@ -49,7 +49,7 @@ const DropdownMenuSubContent = React.forwardRef<
       'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
       'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2',
       'data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-      className
+      className,
     )}
     {...props}
   />
@@ -73,7 +73,7 @@ const DropdownMenuContent = React.forwardRef<
         'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
         'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2',
         'data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-        className
+        className,
       )}
       {...props}
     />
@@ -96,10 +96,11 @@ const DropdownMenuItem = React.forwardRef<
       'transition-colors duration-[var(--transition-fast)]',
       'focus:bg-[var(--color-accent-muted)] focus:text-[var(--color-accent)]',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-      destructive && 'text-[var(--color-error)] focus:bg-[var(--color-error-muted)] focus:text-[var(--color-error)]',
+      destructive &&
+        'text-[var(--color-error)] focus:bg-[var(--color-error-muted)] focus:text-[var(--color-error)]',
       !destructive && 'text-[var(--color-text)]',
       inset && 'pl-8',
-      className
+      className,
     )}
     {...props}
   />
@@ -117,7 +118,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
       'rounded-[var(--radius-sm)] py-1.5 pl-8 pr-2 text-sm text-[var(--color-text)]',
       'focus:bg-[var(--color-accent-muted)] focus:text-[var(--color-accent)] outline-none',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-      className
+      className,
     )}
     checked={checked}
     {...props}
@@ -143,7 +144,7 @@ const DropdownMenuRadioItem = React.forwardRef<
       'rounded-[var(--radius-sm)] py-1.5 pl-8 pr-2 text-sm text-[var(--color-text)]',
       'focus:bg-[var(--color-accent-muted)] focus:text-[var(--color-accent)] outline-none',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-      className
+      className,
     )}
     {...props}
   >
@@ -168,7 +169,7 @@ const DropdownMenuLabel = React.forwardRef<
     className={cn(
       'px-2 py-1.5 text-xs font-medium text-[var(--color-text-muted)]',
       inset && 'pl-8',
-      className
+      className,
     )}
     {...props}
   />
@@ -189,7 +190,10 @@ DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName
 
 const DropdownMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => (
   <span
-    className={cn('ml-auto text-xs font-mono tracking-widest text-[var(--color-text-subtle)]', className)}
+    className={cn(
+      'ml-auto text-xs font-mono tracking-widest text-[var(--color-text-subtle)]',
+      className,
+    )}
     {...props}
   />
 )

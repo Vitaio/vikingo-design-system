@@ -25,7 +25,7 @@ const spinnerVariants = cva(
       size: 'md',
       variant: 'accent',
     },
-  }
+  },
 )
 
 export interface SpinnerProps
@@ -34,7 +34,7 @@ export interface SpinnerProps
   label?: string
 }
 
-import React from 'react'
+import type React from 'react'
 
 export function Spinner({ size, variant, label, className, ...props }: SpinnerProps) {
   return (
@@ -45,9 +45,7 @@ export function Spinner({ size, variant, label, className, ...props }: SpinnerPr
       {...props}
     >
       <span className={spinnerVariants({ size, variant })} aria-hidden="true" />
-      {label && (
-        <span className="text-sm text-[var(--color-text-muted)]">{label}</span>
-      )}
+      {label && <span className="text-sm text-[var(--color-text-muted)]">{label}</span>}
     </span>
   )
 }

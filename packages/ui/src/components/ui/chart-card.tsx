@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 
 export interface ChartCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -29,7 +29,7 @@ function ChartCard({
         'transition-all duration-[var(--transition-base)]',
         'hover:border-[var(--color-border-strong)] hover:shadow-[var(--shadow-md)]',
         'overflow-hidden',
-        className
+        className,
       )}
       {...props}
     >
@@ -52,10 +52,7 @@ function ChartCard({
 
       {/* Chart terület */}
       <div
-        className={cn(
-          'px-4 pb-4',
-          loading && 'flex items-center justify-center'
-        )}
+        className={cn('px-4 pb-4', loading && 'flex items-center justify-center')}
         style={{ minHeight: chartMinHeight }}
       >
         {loading ? (

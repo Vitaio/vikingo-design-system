@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 
 // ── Base Skeleton ────────────────────────────────────────────────────────────
@@ -6,10 +6,7 @@ import { cn } from '../../lib/utils'
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn(
-        'animate-pulse rounded-[var(--radius-md)] bg-[var(--color-border)]',
-        className
-      )}
+      className={cn('animate-pulse rounded-[var(--radius-md)] bg-[var(--color-border)]', className)}
       {...props}
     />
   )
@@ -53,9 +50,7 @@ export interface SkeletonCircleProps {
 }
 
 function SkeletonCircle({ size = 'md', className }: SkeletonCircleProps) {
-  return (
-    <Skeleton className={cn('rounded-full shrink-0', circleSizes[size], className)} />
-  )
+  return <Skeleton className={cn('rounded-full shrink-0', circleSizes[size], className)} />
 }
 
 // ── SkeletonCard ─────────────────────────────────────────────────────────────
@@ -71,7 +66,7 @@ function SkeletonCard({ image = true, className }: SkeletonCardProps) {
     <div
       className={cn(
         'rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden',
-        className
+        className,
       )}
     >
       {image && <Skeleton className="h-40 w-full rounded-none" />}
@@ -97,9 +92,7 @@ export interface SkeletonButtonProps {
 }
 
 function SkeletonButton({ size = 'md', className }: SkeletonButtonProps) {
-  return (
-    <Skeleton className={cn('rounded-[var(--radius-md)]', buttonSizes[size], className)} />
-  )
+  return <Skeleton className={cn('rounded-[var(--radius-md)]', buttonSizes[size], className)} />
 }
 
 export { Skeleton, SkeletonText, SkeletonCircle, SkeletonCard, SkeletonButton }

@@ -11,15 +11,13 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, leftIcon, rightIcon, error, hint, label, id, ...props }, ref) => {
-    const inputId = id || React.useId()
+    const generatedId = React.useId()
+    const inputId = id || generatedId
 
     return (
       <div className="flex flex-col gap-1.5 w-full">
         {label && (
-          <label
-            htmlFor={inputId}
-            className="text-sm font-medium text-[var(--color-text)]"
-          >
+          <label htmlFor={inputId} className="text-sm font-medium text-[var(--color-text)]">
             {label}
           </label>
         )}
@@ -42,10 +40,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               'hover:border-[var(--color-border-strong)]',
               'focus:outline-none focus:border-[var(--color-border-focus)] focus:ring-2 focus:ring-[var(--color-accent-muted)] focus:hover:border-[var(--color-border-focus)]',
               'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[var(--color-bg)] disabled:hover:border-[var(--color-border)]',
-              error && 'border-[var(--color-error)] focus:border-[var(--color-error)] focus:ring-[var(--color-error-muted)]',
+              error &&
+                'border-[var(--color-error)] focus:border-[var(--color-error)] focus:ring-[var(--color-error-muted)]',
               leftIcon && 'pl-10',
               rightIcon && 'pr-10',
-              className
+              className,
             )}
             ref={ref}
             {...props}
@@ -57,13 +56,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {hint && (
-          <p className={cn('text-xs', error ? 'text-[var(--color-error)]' : 'text-[var(--color-text-muted)]')}>
+          <p
+            className={cn(
+              'text-xs',
+              error ? 'text-[var(--color-error)]' : 'text-[var(--color-text-muted)]',
+            )}
+          >
             {hint}
           </p>
         )}
       </div>
     )
-  }
+  },
 )
 Input.displayName = 'Input'
 

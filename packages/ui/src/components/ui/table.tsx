@@ -10,7 +10,7 @@ const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableE
         {...props}
       />
     </div>
-  )
+  ),
 )
 Table.displayName = 'Table'
 
@@ -18,7 +18,11 @@ const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <thead ref={ref} className={cn('[&_tr]:border-b [&_tr]:border-[var(--color-border)]', className)} {...props} />
+  <thead
+    ref={ref}
+    className={cn('[&_tr]:border-b [&_tr]:border-[var(--color-border)]', className)}
+    {...props}
+  />
 ))
 TableHeader.displayName = 'TableHeader'
 
@@ -40,7 +44,7 @@ const TableFooter = React.forwardRef<
       'border-t border-[var(--color-border)]',
       'bg-[var(--color-bg)]/50',
       'font-medium [&>tr]:last:border-b-0',
-      className
+      className,
     )}
     {...props}
   />
@@ -56,17 +60,20 @@ const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTML
         'transition-colors duration-[var(--transition-fast)]',
         'hover:bg-[var(--color-border)]/30',
         'data-[state=selected]:bg-[var(--color-accent-muted)]',
-        className
+        className,
       )}
       {...props}
     />
-  )
+  ),
 )
 TableRow.displayName = 'TableRow'
 
 const TableHead = React.forwardRef<
   HTMLTableCellElement,
-  React.ThHTMLAttributes<HTMLTableCellElement> & { sortable?: boolean; sorted?: 'asc' | 'desc' | false }
+  React.ThHTMLAttributes<HTMLTableCellElement> & {
+    sortable?: boolean
+    sorted?: 'asc' | 'desc' | false
+  }
 >(({ className, sortable, sorted, children, onClick, ...props }, ref) => (
   <th
     ref={ref}
@@ -76,7 +83,7 @@ const TableHead = React.forwardRef<
       'whitespace-nowrap',
       sortable && 'cursor-pointer select-none hover:text-[var(--color-text)]',
       '[&:has([role=checkbox])]:pr-0',
-      className
+      className,
     )}
     onClick={sortable ? onClick : undefined}
     {...props}
@@ -88,7 +95,9 @@ const TableHead = React.forwardRef<
           {sorted === 'asc' ? '↑' : sorted === 'desc' ? '↓' : '↕'}
         </span>
       </span>
-    ) : children}
+    ) : (
+      children
+    )}
   </th>
 ))
 TableHead.displayName = 'TableHead'
@@ -102,7 +111,7 @@ const TableCell = React.forwardRef<
     className={cn(
       'px-3 sm:px-4 py-2 sm:py-3 align-middle text-[var(--color-text)]',
       '[&:has([role=checkbox])]:pr-0',
-      className
+      className,
     )}
     {...props}
   />

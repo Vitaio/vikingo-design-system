@@ -1,6 +1,6 @@
-import * as React from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
+import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 const Dialog = DialogPrimitive.Root
@@ -18,7 +18,7 @@ const DialogOverlay = React.forwardRef<
       'fixed inset-0 z-50 bg-black/60 backdrop-blur-sm',
       'data-[state=open]:animate-in data-[state=closed]:animate-out',
       'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-      className
+      className,
     )}
     {...props}
   />
@@ -51,20 +51,22 @@ const DialogContent = React.forwardRef<
         size === 'lg' && 'max-w-2xl',
         size === 'xl' && 'max-w-4xl',
         size === 'full' && 'max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)]',
-        className
+        className,
       )}
       {...props}
     >
       {children}
       {!hideClose && (
-        <DialogPrimitive.Close className={cn(
-          'absolute right-4 top-4 rounded-[var(--radius-sm)] p-1',
-          'text-[var(--color-text-muted)] hover:text-[var(--color-text)]',
-          'hover:bg-[var(--color-bg)]',
-          'transition-colors duration-[var(--transition-fast)]',
-          'focus:outline-none focus:ring-2 focus:ring-[var(--color-border-focus)]',
-          'disabled:pointer-events-none'
-        )}>
+        <DialogPrimitive.Close
+          className={cn(
+            'absolute right-4 top-4 rounded-[var(--radius-sm)] p-1',
+            'text-[var(--color-text-muted)] hover:text-[var(--color-text)]',
+            'hover:bg-[var(--color-bg)]',
+            'transition-colors duration-[var(--transition-fast)]',
+            'focus:outline-none focus:ring-2 focus:ring-[var(--color-border-focus)]',
+            'disabled:pointer-events-none',
+          )}
+        >
           <X className="h-4 w-4" />
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
@@ -80,7 +82,13 @@ const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
 DialogHeader.displayName = 'DialogHeader'
 
 const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex flex-col-reverse sm:flex-row items-center justify-end gap-2 sm:gap-3 mt-4 sm:mt-6', className)} {...props} />
+  <div
+    className={cn(
+      'flex flex-col-reverse sm:flex-row items-center justify-end gap-2 sm:gap-3 mt-4 sm:mt-6',
+      className,
+    )}
+    {...props}
+  />
 )
 DialogFooter.displayName = 'DialogFooter'
 
@@ -90,7 +98,10 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn('font-display font-semibold text-lg sm:text-xl text-[var(--color-text)] tracking-tight', className)}
+    className={cn(
+      'font-display font-semibold text-lg sm:text-xl text-[var(--color-text)] tracking-tight',
+      className,
+    )}
     {...props}
   />
 ))

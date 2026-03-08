@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 export interface PeriodOption {
@@ -22,7 +21,7 @@ function PeriodFilter({ options, value, onChange, className }: PeriodFilterProps
         'border border-[var(--color-border)]',
         'p-0.5',
         'overflow-x-auto scrollbar-none max-w-full',
-        className
+        className,
       )}
       role="group"
     >
@@ -40,7 +39,7 @@ function PeriodFilter({ options, value, onChange, className }: PeriodFilterProps
               'cursor-pointer select-none whitespace-nowrap',
               active
                 ? 'bg-[var(--color-accent)] text-white shadow-[var(--shadow-sm)]'
-                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface)]'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface)]',
             )}
           >
             {option.label}

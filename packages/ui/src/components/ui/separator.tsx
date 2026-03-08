@@ -1,5 +1,5 @@
-import * as React from 'react'
 import * as SeparatorPrimitive from '@radix-ui/react-separator'
+import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 const Separator = React.forwardRef<
@@ -13,7 +13,7 @@ const Separator = React.forwardRef<
     className={cn(
       'shrink-0 bg-[var(--color-border)]',
       orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
-      className
+      className,
     )}
     {...props}
   />

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 
 export interface EmptyStateProps {
@@ -20,7 +20,12 @@ export function EmptyState({
 }: EmptyStateProps) {
   if (variant === 'compact') {
     return (
-      <div className={cn('flex items-center gap-3 py-4 px-2 text-[var(--color-text-muted)]', className)}>
+      <div
+        className={cn(
+          'flex items-center gap-3 py-4 px-2 text-[var(--color-text-muted)]',
+          className,
+        )}
+      >
         {icon && <span className="shrink-0 opacity-50">{icon}</span>}
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-[var(--color-text-subtle)]">{title}</p>
@@ -33,10 +38,7 @@ export function EmptyState({
 
   return (
     <div
-      className={cn(
-        'flex flex-col items-center justify-center text-center py-12 px-6',
-        className
-      )}
+      className={cn('flex flex-col items-center justify-center text-center py-12 px-6', className)}
     >
       {icon && (
         <div className="mb-4 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] p-4 text-[var(--color-text-muted)]">
@@ -47,9 +49,7 @@ export function EmptyState({
         {title}
       </h3>
       {description && (
-        <p className="text-sm text-[var(--color-text-muted)] max-w-xs">
-          {description}
-        </p>
+        <p className="text-sm text-[var(--color-text-muted)] max-w-xs">{description}</p>
       )}
       {action && <div className="mt-5">{action}</div>}
     </div>

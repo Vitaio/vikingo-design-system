@@ -29,7 +29,8 @@
     "prepare": "tsup",
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "tsc --noEmit",
+    "lint": "tsc --noEmit && biome lint . --diagnostic-level=error",
+    "format": "biome check --write .",
     "clean": "rm -rf dist"
   },
   "peerDependencies": {

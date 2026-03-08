@@ -1,6 +1,6 @@
-import * as React from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { Search, X } from 'lucide-react'
+import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 // ── Context ──────────────────────────────────────────────────────────────────
@@ -12,7 +12,7 @@ interface CommandPaletteContextValue {
 }
 
 const CommandPaletteContext = React.createContext<CommandPaletteContextValue>(
-  {} as CommandPaletteContextValue
+  {} as CommandPaletteContextValue,
 )
 
 // ── CommandPalette (root) ────────────────────────────────────────────────────
@@ -39,7 +39,9 @@ function CommandPalette({
   }
 
   return (
-    <CommandPaletteContext.Provider value={{ query, setQuery, close: () => handleOpenChange(false) }}>
+    <CommandPaletteContext.Provider
+      value={{ query, setQuery, close: () => handleOpenChange(false) }}
+    >
       <DialogPrimitive.Root open={open} onOpenChange={handleOpenChange}>
         <DialogPrimitive.Portal>
           <DialogPrimitive.Overlay
@@ -65,9 +67,11 @@ function CommandPalette({
           >
             {/* Search input */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-[var(--color-border)]">
-              <Search className="h-4 w-4 text-[var(--color-text-muted)] shrink-0" aria-hidden="true" />
+              <Search
+                className="h-4 w-4 text-[var(--color-text-muted)] shrink-0"
+                aria-hidden="true"
+              />
               <input
-                autoFocus
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={placeholder}
@@ -93,9 +97,7 @@ function CommandPalette({
             </div>
 
             {/* Content */}
-            <div className="max-h-[60vh] overflow-y-auto p-2">
-              {children}
-            </div>
+            <div className="max-h-[60vh] overflow-y-auto p-2">{children}</div>
           </DialogPrimitive.Content>
         </DialogPrimitive.Portal>
       </DialogPrimitive.Root>
@@ -177,7 +179,7 @@ function CommandItem({
         'transition-colors duration-[var(--transition-fast)]',
         'hover:bg-[var(--color-bg)] focus-visible:outline-none focus-visible:bg-[var(--color-bg)]',
         'disabled:opacity-50 disabled:pointer-events-none',
-        className
+        className,
       )}
     >
       {icon && (
@@ -210,11 +212,7 @@ export interface CommandEmptyProps {
 function CommandEmpty({ children = 'Nincs találat.' }: CommandEmptyProps) {
   const { query } = useCommandPalette()
   if (!query) return null
-  return (
-    <p className="px-3 py-6 text-sm text-center text-[var(--color-text-muted)]">
-      {children}
-    </p>
-  )
+  return <p className="px-3 py-6 text-sm text-center text-[var(--color-text-muted)]">{children}</p>
 }
 
 // ── CommandPaletteTrigger ────────────────────────────────────────────────────
@@ -238,7 +236,7 @@ function CommandPaletteTrigger({
             'hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]',
             'transition-all duration-[var(--transition-fast)]',
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
-            className
+            className,
           )}
         >
           <Search className="h-3.5 w-3.5" />

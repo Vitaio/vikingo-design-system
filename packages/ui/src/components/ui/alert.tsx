@@ -1,13 +1,10 @@
-import * as React from 'react'
-import { AlertCircle, CheckCircle2, Info, TriangleAlert, X } from 'lucide-react'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { AlertCircle, CheckCircle2, Info, TriangleAlert, X } from 'lucide-react'
+import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 const alertVariants = cva(
-  [
-    'relative flex gap-3 rounded-[var(--radius-lg)] border p-4',
-    'text-sm font-body',
-  ].join(' '),
+  ['relative flex gap-3 rounded-[var(--radius-lg)] border p-4', 'text-sm font-body'].join(' '),
   {
     variants: {
       variant: {
@@ -36,7 +33,7 @@ const alertVariants = cva(
     defaultVariants: {
       variant: 'info',
     },
-  }
+  },
 )
 
 const iconMap = {
@@ -59,12 +56,8 @@ function Alert({ className, variant = 'info', title, children, onClose, ...props
     <div className={cn(alertVariants({ variant }), className)} role="alert" {...props}>
       <Icon className="h-4 w-4 mt-0.5 shrink-0" data-alert-icon="" />
       <div className="flex-1 min-w-0">
-        {title && (
-          <p className="font-semibold mb-0.5">{title}</p>
-        )}
-        {children && (
-          <div className="text-[var(--color-text-muted)]">{children}</div>
-        )}
+        {title && <p className="font-semibold mb-0.5">{title}</p>}
+        {children && <div className="text-[var(--color-text-muted)]">{children}</div>}
       </div>
       {onClose && (
         <button
@@ -81,16 +74,21 @@ function Alert({ className, variant = 'info', title, children, onClose, ...props
 
 const AlertTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h5 ref={ref} className={cn('font-semibold leading-none tracking-tight', className)} {...props} />
-  )
+    <h5
+      ref={ref}
+      className={cn('font-semibold leading-none tracking-tight', className)}
+      {...props}
+    />
+  ),
 )
 AlertTitle.displayName = 'AlertTitle'
 
-const AlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('text-sm text-[var(--color-text-muted)]', className)} {...props} />
-  )
-)
+const AlertDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn('text-sm text-[var(--color-text-muted)]', className)} {...props} />
+))
 AlertDescription.displayName = 'AlertDescription'
 
 export { Alert, AlertTitle, AlertDescription }

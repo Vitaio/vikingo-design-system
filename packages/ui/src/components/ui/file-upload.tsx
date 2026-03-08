@@ -1,5 +1,5 @@
+import { AlertCircle, CheckCircle2, FileText, UploadCloud, X } from 'lucide-react'
 import * as React from 'react'
-import { UploadCloud, X, FileText, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -7,7 +7,7 @@ import { cn } from '../../lib/utils'
 export interface FileUploadProps {
   accept?: string
   multiple?: boolean
-  maxSize?: number               // bytes
+  maxSize?: number // bytes
   onFileSelect?: (files: File[]) => void
   /** Controlled upload progress 0–100 (shows progress bar when set) */
   progress?: number
@@ -51,7 +51,7 @@ export function FileUpload({
     const arr = Array.from(fileList)
 
     if (maxSize) {
-      const oversized = arr.filter(f => f.size > maxSize)
+      const oversized = arr.filter((f) => f.size > maxSize)
       if (oversized.length > 0) {
         setSizeError(`A fájl mérete meghaladja a maximumot (${formatBytes(maxSize)})`)
         return
@@ -88,8 +88,11 @@ export function FileUpload({
         tabIndex={disabled ? -1 : 0}
         aria-disabled={disabled}
         onClick={() => !disabled && inputRef.current?.click()}
-        onKeyDown={e => e.key === 'Enter' && !disabled && inputRef.current?.click()}
-        onDragOver={e => { e.preventDefault(); if (!disabled) setDragOver(true) }}
+        onKeyDown={(e) => e.key === 'Enter' && !disabled && inputRef.current?.click()}
+        onDragOver={(e) => {
+          e.preventDefault()
+          if (!disabled) setDragOver(true)
+        }}
         onDragLeave={() => setDragOver(false)}
         onDrop={handleDrop}
         className={cn(
@@ -101,21 +104,23 @@ export function FileUpload({
             ? 'border-[var(--color-accent)] bg-[var(--color-accent-muted)] scale-[1.01]'
             : 'border-[var(--color-border)] bg-[var(--color-bg)] hover:border-[var(--color-accent)]/50 hover:bg-[var(--color-accent-muted)]/40',
           disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
-          displayError && 'border-[var(--color-error)] bg-[var(--color-error-muted)]'
+          displayError && 'border-[var(--color-error)] bg-[var(--color-error-muted)]',
         )}
       >
-        <div className={cn(
-          'flex h-12 w-12 items-center justify-center rounded-full',
-          'bg-[var(--color-surface)] border border-[var(--color-border)]',
-          dragOver && 'border-[var(--color-accent)] text-[var(--color-accent)]'
-        )}>
+        <div
+          className={cn(
+            'flex h-12 w-12 items-center justify-center rounded-full',
+            'bg-[var(--color-surface)] border border-[var(--color-border)]',
+            dragOver && 'border-[var(--color-accent)] text-[var(--color-accent)]',
+          )}
+        >
           <UploadCloud className="h-5 w-5 text-[var(--color-text-muted)]" />
         </div>
 
         <div>
           <p className="text-sm font-medium text-[var(--color-text)]">
-            <span className="text-[var(--color-accent)]">Kattints a feltöltéshez</span>
-            {' '}vagy húzd ide a fájlt
+            <span className="text-[var(--color-accent)]">Kattints a feltöltéshez</span> vagy húzd
+            ide a fájlt
           </p>
           {hint && <p className="text-xs text-[var(--color-text-muted)] mt-1">{hint}</p>}
           {maxSize && (
@@ -131,7 +136,7 @@ export function FileUpload({
           accept={accept}
           multiple={multiple}
           className="sr-only"
-          onChange={e => processFiles(e.target.files)}
+          onChange={(e) => processFiles(e.target.files)}
           disabled={disabled}
         />
       </div>
@@ -177,7 +182,7 @@ export function FileUpload({
               className={cn(
                 'flex items-center gap-3 px-3 py-2',
                 'rounded-[var(--radius-md)] border border-[var(--color-border)]',
-                'bg-[var(--color-surface)]'
+                'bg-[var(--color-surface)]',
               )}
             >
               <FileText className="h-4 w-4 shrink-0 text-[var(--color-text-muted)]" />

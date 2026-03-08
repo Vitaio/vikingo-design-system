@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 
 export interface MetricRowProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,7 +15,7 @@ function MetricRow({ color, label, sublabel, value, className, ...props }: Metri
       className={cn(
         'flex items-center gap-3 py-3.5',
         'border-b border-[var(--color-border)] last:border-0',
-        className
+        className,
       )}
       {...props}
     >

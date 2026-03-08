@@ -1,5 +1,5 @@
-import * as React from 'react'
 import * as SwitchPrimitive from '@radix-ui/react-switch'
+import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 const Switch = React.forwardRef<
@@ -13,7 +13,7 @@ const Switch = React.forwardRef<
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2',
       'disabled:cursor-not-allowed disabled:opacity-50',
       'data-[state=checked]:bg-[var(--color-accent)] data-[state=unchecked]:bg-[var(--color-border-strong)]',
-      className
+      className,
     )}
     {...props}
     ref={ref}
@@ -22,7 +22,7 @@ const Switch = React.forwardRef<
       className={cn(
         'pointer-events-none block h-5 w-5 rounded-full bg-white shadow-md will-change-transform',
         'transition-transform duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]',
-        'data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0'
+        'data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0',
       )}
     />
   </SwitchPrimitive.Root>

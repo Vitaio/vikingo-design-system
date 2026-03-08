@@ -1,7 +1,7 @@
 'use client'
 
-import * as React from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 import { Badge } from '../ui/badge'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
@@ -54,17 +54,23 @@ function SidebarNavItem({
         'transition-all duration-[var(--transition-fast)]',
         'cursor-pointer select-none',
         // Dark variant
-        !isLight && item.active && 'bg-[var(--sidebar-bg-active)] text-[var(--sidebar-text-active)] shadow-[var(--shadow-sm)]',
-        !isLight && !item.active && 'text-[var(--sidebar-text-muted)] hover:bg-[var(--sidebar-bg-hover)] hover:text-[var(--sidebar-text)]',
+        !isLight &&
+          item.active &&
+          'bg-[var(--sidebar-bg-active)] text-[var(--sidebar-text-active)] shadow-[var(--shadow-sm)]',
+        !isLight &&
+          !item.active &&
+          'text-[var(--sidebar-text-muted)] hover:bg-[var(--sidebar-bg-hover)] hover:text-[var(--sidebar-text)]',
         // Light variant
-        isLight && item.active && 'bg-[var(--sidebar-light-bg-active)] text-[var(--sidebar-light-text-active)] font-semibold',
-        isLight && !item.active && 'text-[var(--sidebar-light-text-muted)] hover:bg-[var(--sidebar-light-bg-hover)] hover:text-[var(--sidebar-light-text)]',
-        collapsed && 'justify-center px-2'
+        isLight &&
+          item.active &&
+          'bg-[var(--sidebar-light-bg-active)] text-[var(--sidebar-light-text-active)] font-semibold',
+        isLight &&
+          !item.active &&
+          'text-[var(--sidebar-light-text-muted)] hover:bg-[var(--sidebar-light-bg-hover)] hover:text-[var(--sidebar-light-text)]',
+        collapsed && 'justify-center px-2',
       )}
     >
-      <span className="flex h-5 w-5 shrink-0 items-center justify-center">
-        {item.icon}
-      </span>
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center">{item.icon}</span>
       {!collapsed && (
         <>
           <span className="flex-1 truncate">{item.label}</span>
@@ -112,14 +118,12 @@ function Sidebar({
       className={cn(
         'flex flex-col h-full',
         'transition-[width] duration-[var(--transition-slow)]',
-        collapsed
-          ? 'w-[var(--sidebar-width-collapsed)]'
-          : 'w-[var(--sidebar-width)]',
+        collapsed ? 'w-[var(--sidebar-width-collapsed)]' : 'w-[var(--sidebar-width)]',
         // Dark variant
         !isLight && 'bg-[var(--sidebar-bg)] border-r border-[var(--sidebar-border)]',
         // Light variant
         isLight && 'bg-[var(--sidebar-light-bg)] border-r border-[var(--sidebar-light-border)]',
-        className
+        className,
       )}
     >
       {/* Logo */}
@@ -128,7 +132,7 @@ function Sidebar({
           'flex items-center h-[var(--topbar-height)] px-4 shrink-0',
           !isLight && 'border-b border-[var(--sidebar-border)]',
           isLight && 'border-b border-[var(--sidebar-light-border)]',
-          collapsed && 'justify-center px-2'
+          collapsed && 'justify-center px-2',
         )}
       >
         {collapsed ? (logoCollapsed ?? logo) : logo}
@@ -143,7 +147,7 @@ function Sidebar({
                 className={cn(
                   'px-3 mb-1.5 text-[10px] font-mono uppercase tracking-widest',
                   !isLight && 'text-[var(--sidebar-text-muted)]',
-                  isLight && 'text-[var(--sidebar-light-text-muted)]'
+                  isLight && 'text-[var(--sidebar-light-text-muted)]',
                 )}
               >
                 {section.label}
@@ -167,7 +171,7 @@ function Sidebar({
             'shrink-0 p-3',
             !isLight && 'border-t border-[var(--sidebar-border)]',
             isLight && 'border-t border-[var(--sidebar-light-border)]',
-            collapsed && 'flex justify-center'
+            collapsed && 'flex justify-center',
           )}
         >
           {footer}
@@ -181,16 +185,14 @@ function Sidebar({
           className={cn(
             'hidden md:flex shrink-0 items-center justify-center h-10',
             'transition-colors duration-[var(--transition-fast)] cursor-pointer',
-            !isLight && 'border-t border-[var(--sidebar-border)] text-[var(--sidebar-text-muted)] hover:text-[var(--sidebar-text)] hover:bg-[var(--sidebar-bg-hover)]',
-            isLight && 'border-t border-[var(--sidebar-light-border)] text-[var(--sidebar-light-text-muted)] hover:text-[var(--sidebar-light-text)] hover:bg-[var(--sidebar-light-bg-hover)]',
+            !isLight &&
+              'border-t border-[var(--sidebar-border)] text-[var(--sidebar-text-muted)] hover:text-[var(--sidebar-text)] hover:bg-[var(--sidebar-bg-hover)]',
+            isLight &&
+              'border-t border-[var(--sidebar-light-border)] text-[var(--sidebar-light-text-muted)] hover:text-[var(--sidebar-light-text)] hover:bg-[var(--sidebar-light-bg-hover)]',
           )}
           aria-label={collapsed ? 'Kinyitás' : 'Összecsukás'}
         >
-          {collapsed ? (
-            <ChevronRight className="h-4 w-4" />
-          ) : (
-            <ChevronLeft className="h-4 w-4" />
-          )}
+          {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
         </button>
       )}
     </aside>

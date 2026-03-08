@@ -9,7 +9,8 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, label, hint, error, id, ...props }, ref) => {
-    const inputId = id ?? React.useId()
+    const generatedId = React.useId()
+    const inputId = id ?? generatedId
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
@@ -35,12 +36,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
               ? 'border-[var(--color-error)] focus:border-[var(--color-error)] focus:ring-[var(--color-error)]/20'
               : 'border-[var(--color-border)] focus:border-[var(--color-border-focus)] focus:ring-[var(--color-accent-muted)]',
             'disabled:cursor-not-allowed disabled:opacity-50',
-            className
+            className,
           )}
           aria-invalid={!!error}
-          aria-describedby={
-            error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined
-          }
+          aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}
           {...props}
         />
         {error && (
@@ -55,7 +54,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
       </div>
     )
-  }
+  },
 )
 Textarea.displayName = 'Textarea'
 
