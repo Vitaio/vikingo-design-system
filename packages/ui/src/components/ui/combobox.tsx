@@ -19,6 +19,8 @@ export interface ComboboxProps {
   placeholder?: string
   searchPlaceholder?: string
   emptyText?: string
+  /** Returns the trigger label when multiple items are selected, e.g. (n) => `${n} selected` */
+  selectedCountLabel?: (count: number) => string
   multiple?: boolean
   disabled?: boolean
   className?: string
@@ -41,6 +43,7 @@ export function Combobox({
   placeholder = 'Válassz...',
   searchPlaceholder = 'Keresés...',
   emptyText = 'Nincs találat',
+  selectedCountLabel = (count) => `${count} kiválasztva`,
   multiple = false,
   disabled = false,
   className,
@@ -77,8 +80,8 @@ export function Combobox({
     if (selected.length === 1) {
       return options.find((o) => o.value === selected[0])?.label
     }
-    return `${selected.length} kiválasztva`
-  }, [selected, options])
+    return selectedCountLabel(selected.length)
+  }, [selected, options, selectedCountLabel])
 
   return (
     <PopoverPrimitive.Root

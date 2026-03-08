@@ -58,6 +58,8 @@ export interface SearchBarProps
   onResultSelect?: (result: SearchResult) => void
   /** Placeholder text */
   placeholder?: string
+  /** aria-label for the clear button */
+  clearLabel?: string
   /** Visual size */
   size?: 'sm' | 'md' | 'lg'
   /** Show as a full bar (rounded-full) or standard field */
@@ -73,6 +75,7 @@ export function SearchBar({
   results,
   onResultSelect,
   placeholder = 'Keresés...',
+  clearLabel = 'Keresés törlése',
   emptyText = 'Nincs találat',
   size = 'md',
   variant = 'field',
@@ -210,7 +213,7 @@ export function SearchBar({
         <button
           type="button"
           onClick={handleClear}
-          aria-label="Keresés törlése"
+          aria-label={clearLabel}
           className={cn(
             'absolute top-1/2 -translate-y-1/2 right-3 text-[var(--color-text-muted)]',
             'hover:text-[var(--color-text)] transition-colors rounded-full p-0.5',

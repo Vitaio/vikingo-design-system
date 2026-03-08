@@ -48,9 +48,18 @@ export interface AlertProps
     VariantProps<typeof alertVariants> {
   title?: string
   onClose?: () => void
+  closeLabel?: string
 }
 
-function Alert({ className, variant = 'info', title, children, onClose, ...props }: AlertProps) {
+function Alert({
+  className,
+  variant = 'info',
+  title,
+  children,
+  onClose,
+  closeLabel = 'Bezárás',
+  ...props
+}: AlertProps) {
   const Icon = iconMap[variant ?? 'info']
   return (
     <div className={cn(alertVariants({ variant }), className)} role="alert" {...props}>
@@ -63,7 +72,7 @@ function Alert({ className, variant = 'info', title, children, onClose, ...props
         <button
           onClick={onClose}
           className="shrink-0 text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
-          aria-label="Bezárás"
+          aria-label={closeLabel}
         >
           <X className="h-4 w-4" />
         </button>

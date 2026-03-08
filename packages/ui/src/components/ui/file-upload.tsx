@@ -19,6 +19,16 @@ export interface FileUploadProps {
   className?: string
   /** Hint text inside the drop zone */
   hint?: string
+  /** Accent-colored text in the drop zone (the "click to upload" part) */
+  clickLabel?: string
+  /** Plain text in the drop zone (the "or drag here" part) */
+  dragLabel?: string
+  /** Label shown next to the progress bar percentage */
+  uploadingLabel?: string
+  /** Prefix of the file size error message – formatted max size is appended automatically */
+  fileSizeErrorLabel?: string
+  /** aria-label for the remove-file button on each selected file row */
+  removeFileLabel?: string
 }
 
 function formatBytes(bytes: number) {
@@ -40,6 +50,11 @@ export function FileUpload({
   disabled = false,
   className,
   hint,
+  clickLabel = 'Kattints a feltöltéshez',
+  dragLabel = 'vagy húzd ide a fájlt',
+  uploadingLabel = 'Feltöltés...',
+  fileSizeErrorLabel = 'A fájl mérete meghaladja a maximumot',
+  removeFileLabel = 'Fájl eltávolítása',
 }: FileUploadProps) {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const [dragOver, setDragOver] = React.useState(false)
@@ -53,7 +68,7 @@ export function FileUpload({
     if (maxSize) {
       const oversized = arr.filter((f) => f.size > maxSize)
       if (oversized.length > 0) {
-        setSizeError(`A fájl mérete meghaladja a maximumot (${formatBytes(maxSize)})`)
+        setSizeError(`${fileSizeErrorLabel} (${formatBytes(maxSize)})`)
         return
       }
     }
@@ -119,8 +134,7 @@ export function FileUpload({
 
         <div>
           <p className="text-sm font-medium text-[var(--color-text)]">
-            <span className="text-[var(--color-accent)]">Kattints a feltöltéshez</span> vagy húzd
-            ide a fájlt
+            <span className="text-[var(--color-accent)]">{clickLabel}</span> {dragLabel}
           </p>
           {hint && <p className="text-xs text-[var(--color-text-muted)] mt-1">{hint}</p>}
           {maxSize && (
@@ -145,7 +159,7 @@ export function FileUpload({
       {progress !== undefined && progress > 0 && progress < 100 && (
         <div className="flex flex-col gap-1">
           <div className="flex justify-between text-xs text-[var(--color-text-muted)]">
-            <span>Feltöltés...</span>
+            <span>{uploadingLabel}</span>
             <span>{progress}%</span>
           </div>
           <div className="h-1.5 w-full rounded-full bg-[var(--color-border)] overflow-hidden">
@@ -192,6 +206,7 @@ export function FileUpload({
               </div>
               <button
                 type="button"
+                aria-label={removeFileLabel}
                 onClick={() => removeFile(i)}
                 className="shrink-0 p-1 rounded text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-colors"
               >

@@ -32,15 +32,16 @@ export interface SpinnerProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof spinnerVariants> {
   label?: string
+  ariaLabel?: string
 }
 
 import type React from 'react'
 
-export function Spinner({ size, variant, label, className, ...props }: SpinnerProps) {
+export function Spinner({ size, variant, label, ariaLabel = 'Betöltés...', className, ...props }: SpinnerProps) {
   return (
     <span
       role="status"
-      aria-label={label ?? 'Betöltés...'}
+      aria-label={label ?? ariaLabel}
       className={cn('inline-flex items-center gap-2', className)}
       {...props}
     >
