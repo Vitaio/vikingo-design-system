@@ -14,13 +14,13 @@ This project uses the **Vikingo Design System** (`@vikingo/ui`).
 ## Available Components
 
 ### Forms
-`Button` `Input` `NumberInput` `Textarea` `Select` `Checkbox` `Switch` `RadioGroup` `RadioButton` `Slider` `Chip` `ChipGroup` `DatePicker` `DateRangePicker` `SearchBar` `FileUpload` `Combobox` `CopyButton` `Form` `FormField` `FormItem` `FormLabel` `FormControl` `FormDescription` `FormMessage`
+`Button` `Input` `NumberInput` `Textarea` `Select` `Checkbox` `Switch` `RadioGroup` `RadioButton` `Slider` `Chip` `ChipGroup` `DatePicker` `DateRangePicker` `SearchBar` `FileUpload` `Combobox` `TagsInput` `CopyButton` `Form` `FormField` `FormItem` `FormLabel` `FormControl` `FormDescription` `FormMessage`
 
 ### Display
 `Avatar` `Badge` `Card` `Alert` `Progress` `Skeleton` `ImageCard` `Spinner` `Separator` `Carousel` `CarouselItem` `EmptyState` `Logo`
 
 ### Overlays
-`Dialog` `Drawer` `Tooltip` `TooltipProvider` `Toaster` `toast` `DropdownMenu` `CommandPalette` `ConfirmDialog`
+`Dialog` `Drawer` `Tooltip` `TooltipProvider` `Toaster` `toast` `DropdownMenu` `CommandPalette` `ConfirmDialog` `Popover` `PopoverTrigger` `PopoverContent` `PopoverClose`
 
 ### Navigation
 `Tabs` `Breadcrumb` `Pagination` `Accordion`

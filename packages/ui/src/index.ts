@@ -153,6 +153,13 @@ export { NumberInput } from './components/ui/number-input'
 export type { PageHeaderProps } from './components/ui/page-header'
 export { PageHeader } from './components/ui/page-header'
 export {
+  Popover,
+  PopoverAnchor,
+  PopoverClose,
+  PopoverContent,
+  PopoverTrigger,
+} from './components/ui/popover'
+export {
   Pagination,
   PaginationContent,
   PaginationEllipsis,
@@ -201,6 +208,8 @@ export { Spinner } from './components/ui/spinner'
 export type { StatCardProps } from './components/ui/stat-card'
 export { StatCard } from './components/ui/stat-card'
 export { Switch } from './components/ui/switch'
+export type { TagsInputProps } from './components/ui/tags-input'
+export { TagsInput } from './components/ui/tags-input'
 // Table
 export {
   Table,
