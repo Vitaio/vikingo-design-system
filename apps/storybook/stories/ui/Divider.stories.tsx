@@ -21,7 +21,9 @@ export const Horizontal: Story = {
         <Separator />
         <div>
           <p className="text-sm font-medium text-[var(--color-text)]">Platform</p>
-          <p className="text-sm text-[var(--color-text-muted)] mt-0.5">Facebook Ads + Instagram Ads</p>
+          <p className="text-sm text-[var(--color-text-muted)] mt-0.5">
+            Facebook Ads + Instagram Ads
+          </p>
         </div>
         <Separator />
         <div>
@@ -43,7 +45,9 @@ export const Vertical: Story = {
   render: () => (
     <div className="p-6 bg-[var(--color-bg)]">
       <div className="flex items-center gap-4 h-8">
-        <span className="text-sm font-mono text-[var(--color-text-muted)]">Impressziók: 48 291</span>
+        <span className="text-sm font-mono text-[var(--color-text-muted)]">
+          Impressziók: 48 291
+        </span>
         <Separator orientation="vertical" />
         <span className="text-sm font-mono text-[var(--color-text-muted)]">Kattintások: 1 842</span>
         <Separator orientation="vertical" />
@@ -108,8 +112,12 @@ export const InCard: Story = {
   render: () => (
     <div className="w-[320px] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden">
       <div className="px-5 py-4">
-        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)]">Facebook Ads</p>
-        <p className="mt-1 text-2xl font-display font-semibold text-[var(--color-text)]">2 662 120 Ft</p>
+        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)]">
+          Facebook Ads
+        </p>
+        <p className="mt-1 text-2xl font-display font-semibold text-[var(--color-text)]">
+          2 662 120 Ft
+        </p>
       </div>
       <Separator />
       <div className="px-5 py-3 grid grid-cols-3 gap-4">
@@ -120,7 +128,9 @@ export const InCard: Story = {
         ].map((stat, i) => (
           <div key={i} className="text-center">
             <p className="text-sm font-mono font-semibold text-[var(--color-text)]">{stat.value}</p>
-            <p className="text-[10px] font-mono text-[var(--color-text-muted)] mt-0.5">{stat.label}</p>
+            <p className="text-[10px] font-mono text-[var(--color-text-muted)] mt-0.5">
+              {stat.label}
+            </p>
           </div>
         ))}
       </div>
@@ -135,7 +145,7 @@ export const InCard: Story = {
 export const Inset: Story = {
   name: 'Inset · Behúzott',
   render: () => (
-    <div className="w-[320px] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
+    <div className="w-[320px] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden">
       {[
         { platform: 'Facebook Ads', spend: '2 662 120 Ft', roas: '4.2x' },
         { platform: 'Google Ads', spend: '156 200 Ft', roas: '6.1x' },
@@ -150,9 +160,7 @@ export const Inset: Story = {
               <p className="text-xs font-mono text-[var(--color-accent)]">{item.roas}</p>
             </div>
           </div>
-          {i < arr.length - 1 && (
-            <Separator className="ml-4" />
-          )}
+          {i < arr.length - 1 && <Separator className="ml-4" />}
         </div>
       ))}
     </div>

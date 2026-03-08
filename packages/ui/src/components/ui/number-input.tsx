@@ -86,20 +86,30 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             {label}
           </label>
         )}
-        <div className="relative flex items-center">
+        <div
+          className={cn(
+            'flex items-stretch h-10 w-full overflow-hidden',
+            'rounded-[var(--radius-md)] border border-[var(--color-border)]',
+            'bg-[var(--color-surface)]',
+            'transition-colors duration-[var(--transition-fast)]',
+            'focus-within:border-[var(--color-border-focus)] focus-within:ring-2 focus-within:ring-[var(--color-accent-muted)]',
+            error &&
+              'border-[var(--color-error)] focus-within:border-[var(--color-error)] focus-within:ring-[var(--color-error-muted)]',
+          )}
+        >
           <button
             type="button"
             aria-label="Csökkentés"
             onClick={() => update(current - step)}
             disabled={disabled || !canDecrement}
             className={cn(
-              'absolute left-0 flex items-center justify-center h-10 w-10 rounded-l-[var(--radius-md)]',
-              'border border-r-0 border-[var(--color-border)]',
-              'bg-[var(--color-surface)] text-[var(--color-text-muted)]',
+              'flex items-center justify-center shrink-0 w-10',
+              'border-r border-[var(--color-border)]',
+              'text-[var(--color-text-muted)]',
               'transition-colors duration-[var(--transition-fast)]',
-              'hover:bg-[var(--color-bg)] hover:text-[var(--color-text)] hover:border-[var(--color-border-strong)]',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
-              'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-[var(--color-surface)] disabled:hover:text-[var(--color-text-muted)] disabled:hover:border-[var(--color-border)]',
+              'hover:bg-[var(--color-bg)] hover:text-[var(--color-text)]',
+              'focus-visible:outline-none',
+              'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-[var(--color-text-muted)]',
               error && 'border-[var(--color-error)]',
             )}
           >
@@ -117,18 +127,12 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             disabled={disabled}
             onChange={handleInputChange}
             className={cn(
-              'flex h-10 w-full',
-              'border border-[var(--color-border)]',
-              'bg-[var(--color-surface)] text-[var(--color-text)]',
-              'px-3 py-2 text-sm font-body text-center',
-              'transition-all duration-[var(--transition-fast)]',
-              'hover:border-[var(--color-border-strong)]',
-              'focus:outline-none focus:border-[var(--color-border-focus)] focus:ring-2 focus:ring-[var(--color-accent-muted)] focus:hover:border-[var(--color-border-focus)]',
-              'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[var(--color-bg)] disabled:hover:border-[var(--color-border)]',
+              'flex-1 min-w-0 h-full',
+              'bg-transparent text-[var(--color-text)]',
+              'px-3 text-sm font-body text-center',
+              'focus:outline-none',
+              'disabled:cursor-not-allowed disabled:opacity-50',
               '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
-              'rounded-none pl-10 pr-10',
-              error &&
-                'border-[var(--color-error)] focus:border-[var(--color-error)] focus:ring-[var(--color-error-muted)]',
               className,
             )}
             {...props}
@@ -140,13 +144,13 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             onClick={() => update(current + step)}
             disabled={disabled || !canIncrement}
             className={cn(
-              'absolute right-0 flex items-center justify-center h-10 w-10 rounded-r-[var(--radius-md)]',
-              'border border-l-0 border-[var(--color-border)]',
-              'bg-[var(--color-surface)] text-[var(--color-text-muted)]',
+              'flex items-center justify-center shrink-0 w-10',
+              'border-l border-[var(--color-border)]',
+              'text-[var(--color-text-muted)]',
               'transition-colors duration-[var(--transition-fast)]',
-              'hover:bg-[var(--color-bg)] hover:text-[var(--color-text)] hover:border-[var(--color-border-strong)]',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
-              'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-[var(--color-surface)] disabled:hover:text-[var(--color-text-muted)] disabled:hover:border-[var(--color-border)]',
+              'hover:bg-[var(--color-bg)] hover:text-[var(--color-text)]',
+              'focus-visible:outline-none',
+              'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-[var(--color-text-muted)]',
               error && 'border-[var(--color-error)]',
             )}
           >

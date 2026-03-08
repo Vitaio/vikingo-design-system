@@ -205,7 +205,9 @@
       rotate(var(--tw-exit-rotate, 0));
   }
 }
-.animate-in {
+
+/* Registered as @utility so data-state variants (data-[state=open]:animate-in etc.) work in Tailwind v4 */
+@utility animate-in {
   animation-name: enter;
   animation-duration: 150ms;
   animation-fill-mode: both;
@@ -215,7 +217,7 @@
   --tw-enter-translate-x: initial;
   --tw-enter-translate-y: initial;
 }
-.animate-out {
+@utility animate-out {
   animation-name: exit;
   animation-duration: 150ms;
   animation-fill-mode: both;
@@ -225,24 +227,26 @@
   --tw-exit-translate-x: initial;
   --tw-exit-translate-y: initial;
 }
-.fade-in-0  { --tw-enter-opacity: 0; }
-.fade-out-0 { --tw-exit-opacity: 0; }
-.zoom-in-95  { --tw-enter-scale: 0.95; }
-.zoom-out-95 { --tw-exit-scale: 0.95; }
-.slide-in-from-top-2    { --tw-enter-translate-y: -0.5rem; }
-.slide-in-from-bottom-2 { --tw-enter-translate-y:  0.5rem; }
-.slide-in-from-left-2   { --tw-enter-translate-x: -0.5rem; }
-.slide-in-from-right-2  { --tw-enter-translate-x:  0.5rem; }
+@utility fade-in-0  { --tw-enter-opacity: 0; }
+@utility fade-out-0 { --tw-exit-opacity: 0; }
+@utility zoom-in-95  { --tw-enter-scale: 0.95; }
+@utility zoom-out-95 { --tw-exit-scale: 0.95; }
+@utility slide-in-from-top-2    { --tw-enter-translate-y: -0.5rem; }
+@utility slide-in-from-bottom-2 { --tw-enter-translate-y:  0.5rem; }
+@utility slide-in-from-left-2   { --tw-enter-translate-x: -0.5rem; }
+@utility slide-in-from-right-2  { --tw-enter-translate-x:  0.5rem; }
+@utility slide-in-from-top-4    { --tw-enter-translate-y: -1rem; }
+@utility slide-out-to-top-4     { --tw-exit-translate-y:  -1rem; }
 
-/* ===== DRAWER / SLIDE ANIMATIONS ===== */
-.slide-in-from-right-full { --tw-enter-translate-x: 100%; }
-.slide-in-from-left-full  { --tw-enter-translate-x: -100%; }
-.slide-in-from-bottom-full { --tw-enter-translate-y: 100%; }
-.slide-out-to-right-full  { --tw-exit-translate-x: 100%; }
-.slide-out-to-left-full   { --tw-exit-translate-x: -100%; }
-.slide-out-to-bottom-full { --tw-exit-translate-y: 100%; }
+/* Drawer animations */
+@utility slide-in-from-right-full  { --tw-enter-translate-x:  100%; }
+@utility slide-in-from-left-full   { --tw-enter-translate-x: -100%; }
+@utility slide-in-from-bottom-full { --tw-enter-translate-y:  100%; }
+@utility slide-out-to-right-full   { --tw-exit-translate-x:  100%; }
+@utility slide-out-to-left-full    { --tw-exit-translate-x: -100%; }
+@utility slide-out-to-bottom-full  { --tw-exit-translate-y:  100%; }
 
-/* Used by Dialog */
+/* Dialog animations – static classes because / and % are not valid in @utility names */
 .slide-in-from-left-1\/2   { --tw-enter-translate-x: -50%; }
 .slide-in-from-top-\[48\%\] { --tw-enter-translate-y: -48%; }
 .slide-out-to-left-1\/2    { --tw-exit-translate-x: -50%; }

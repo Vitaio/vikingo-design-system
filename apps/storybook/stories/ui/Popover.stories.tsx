@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Settings, Info, Bell } from 'lucide-react'
+import { useState } from 'react'
 import {
   Button,
+  Checkbox,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -36,45 +38,54 @@ export const Default: Story = {
 
 export const WithHeader: Story = {
   name: 'With Header · Fejléccel',
-  render: () => (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Settings className="h-4 w-4" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-72">
-        <div className="flex flex-col gap-3">
-          <div>
-            <p className="font-semibold text-sm">Beállítások</p>
-            <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
-              A kampány megjelenítési beállításai.
-            </p>
+  render: () => {
+    const [autoRefresh, setAutoRefresh] = useState(true)
+    const [emailNotify, setEmailNotify] = useState(false)
+
+    return (
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <Settings className="h-4 w-4" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-72">
+          <div className="flex flex-col gap-3">
+            <div>
+              <p className="font-semibold text-sm">Beállítások</p>
+              <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
+                A kampány megjelenítési beállításai.
+              </p>
+            </div>
+            <Separator />
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Automatikus frissítés</span>
+                <Checkbox checked={autoRefresh} onCheckedChange={(v) => setAutoRefresh(!!v)} />
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Email értesítő</span>
+                <Checkbox checked={emailNotify} onCheckedChange={(v) => setEmailNotify(!!v)} />
+              </div>
+            </div>
+            <Separator />
+            <div className="flex justify-end gap-2">
+              <PopoverClose asChild>
+                <Button variant="ghost" size="sm">
+                  Mégse
+                </Button>
+              </PopoverClose>
+              <PopoverClose asChild>
+                <Button variant="primary" size="sm">
+                  Mentés
+                </Button>
+              </PopoverClose>
+            </div>
           </div>
-          <Separator />
-          <div className="flex flex-col gap-2">
-            <label className="flex items-center justify-between text-sm">
-              <span>Automatikus frissítés</span>
-              <input type="checkbox" defaultChecked />
-            </label>
-            <label className="flex items-center justify-between text-sm">
-              <span>Email értesítő</span>
-              <input type="checkbox" />
-            </label>
-          </div>
-          <Separator />
-          <div className="flex justify-end gap-2">
-            <PopoverClose asChild>
-              <Button variant="ghost" size="sm">Mégse</Button>
-            </PopoverClose>
-            <PopoverClose asChild>
-              <Button variant="primary" size="sm">Mentés</Button>
-            </PopoverClose>
-          </div>
-        </div>
-      </PopoverContent>
-    </Popover>
-  ),
+        </PopoverContent>
+      </Popover>
+    )
+  },
 }
 
 export const InfoPopover: Story = {
@@ -110,7 +121,9 @@ export const Sides: Story = {
       <div />
       <Popover defaultOpen>
         <PopoverTrigger asChild>
-          <Button variant="secondary" size="sm">Top</Button>
+          <Button variant="secondary" size="sm">
+            Top
+          </Button>
         </PopoverTrigger>
         <PopoverContent side="top" className="w-36 text-center text-sm">
           Felül jelenik meg
@@ -120,7 +133,9 @@ export const Sides: Story = {
 
       <Popover defaultOpen>
         <PopoverTrigger asChild>
-          <Button variant="secondary" size="sm">Left</Button>
+          <Button variant="secondary" size="sm">
+            Left
+          </Button>
         </PopoverTrigger>
         <PopoverContent side="left" className="w-36 text-center text-sm">
           Balra jelenik meg
@@ -129,7 +144,9 @@ export const Sides: Story = {
       <div />
       <Popover defaultOpen>
         <PopoverTrigger asChild>
-          <Button variant="secondary" size="sm">Right</Button>
+          <Button variant="secondary" size="sm">
+            Right
+          </Button>
         </PopoverTrigger>
         <PopoverContent side="right" className="w-36 text-center text-sm">
           Jobbra jelenik meg
@@ -139,7 +156,9 @@ export const Sides: Story = {
       <div />
       <Popover defaultOpen>
         <PopoverTrigger asChild>
-          <Button variant="secondary" size="sm">Bottom</Button>
+          <Button variant="secondary" size="sm">
+            Bottom
+          </Button>
         </PopoverTrigger>
         <PopoverContent side="bottom" className="w-36 text-center text-sm">
           Alul jelenik meg

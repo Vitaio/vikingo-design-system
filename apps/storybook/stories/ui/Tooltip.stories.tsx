@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Info, HelpCircle, Settings } from 'lucide-react'
-import {
-  Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, Button,
-} from '@vikingo/ui'
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, Button } from '@vikingo/ui'
 
 const meta: Meta = {
   title: 'Overlays/Tooltip',
@@ -10,7 +8,7 @@ const meta: Meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <TooltipProvider>
+      <TooltipProvider delayDuration={0}>
         <Story />
       </TooltipProvider>
     ),
@@ -39,10 +37,12 @@ export const Positions: Story = {
   name: 'Positions · Pozíciók',
   render: () => (
     <div className="flex flex-wrap items-center justify-center gap-6 p-12 bg-[var(--color-bg)]">
-      {(['top', 'right', 'bottom', 'left'] as const).map(side => (
+      {(['top', 'right', 'bottom', 'left'] as const).map((side) => (
         <Tooltip key={side}>
           <TooltipTrigger asChild>
-            <Button variant="secondary" size="sm">{side}</Button>
+            <Button variant="secondary" size="sm">
+              {side}
+            </Button>
           </TooltipTrigger>
           <TooltipContent side={side}>
             <p>Tooltip {side} irányban</p>
