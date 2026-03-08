@@ -14,7 +14,7 @@ This project uses the **Vikingo Design System** (`@vikingo/ui`).
 ## Available Components
 
 ### Forms
-`Button` `Input` `NumberInput` `Textarea` `Select` `Checkbox` `Switch` `RadioGroup` `RadioButton` `Slider` `Chip` `ChipGroup` `DatePicker` `DateRangePicker` `SearchBar` `FileUpload` `Combobox` `TagsInput` `CopyButton` `Form` `FormField` `FormItem` `FormLabel` `FormControl` `FormDescription` `FormMessage`
+`Button` `Input` `NumberInput` `Textarea` `Select` `Checkbox` `Switch` `RadioGroup` `RadioButton` `Slider` `Chip` `ChipGroup` `DatePicker` `DateRangePicker` `SearchBar` `FileUpload` `Combobox` `TagsInput` `CopyButton` `SegmentedControl` `Form` `FormField` `FormItem` `FormLabel` `FormControl` `FormDescription` `FormMessage`
 
 ### Display
 `Avatar` `Badge` `Card` `Alert` `Progress` `Skeleton` `ImageCard` `Spinner` `Separator` `Carousel` `CarouselItem` `EmptyState` `Logo`
@@ -26,7 +26,7 @@ This project uses the **Vikingo Design System** (`@vikingo/ui`).
 `Tabs` `Breadcrumb` `Pagination` `Accordion`
 
 ### Data
-`Table` `StatCard` `ChartCard` `MetricRow` `PeriodFilter` `PageHeader`
+`Table` `DataTable` `StatCard` `ChartCard` `MetricRow` `PeriodFilter` `PageHeader`
 
 ### Layout
 `PageLayout` `PageContent` `Sidebar` `Topbar`

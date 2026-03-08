@@ -38,6 +38,8 @@ export {
 export type { ButtonProps } from './components/ui/button'
 // UI Components
 export { Button, buttonVariants } from './components/ui/button'
+export type { ColumnDef, DataTableProps } from './components/ui/data-table'
+export { DataTable } from './components/ui/data-table'
 export {
   Card,
   CardContent,
@@ -208,6 +210,8 @@ export { Spinner } from './components/ui/spinner'
 export type { StatCardProps } from './components/ui/stat-card'
 export { StatCard } from './components/ui/stat-card'
 export { Switch } from './components/ui/switch'
+export type { SegmentedControlProps, SegmentedOption } from './components/ui/segmented-control'
+export { SegmentedControl } from './components/ui/segmented-control'
 export type { TagsInputProps } from './components/ui/tags-input'
 export { TagsInput } from './components/ui/tags-input'
 // Table
