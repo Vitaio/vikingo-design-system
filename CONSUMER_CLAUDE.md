@@ -184,6 +184,91 @@ import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@
 </Table>
 ```
 
+### DataTable (sorting, search, pagination)
+```tsx
+import { DataTable, type ColumnDef, Badge } from '@vikingo/ui'
+
+interface User { id: number; name: string; status: 'active' | 'inactive' }
+
+const columns: ColumnDef<User>[] = [
+  { key: 'id', header: '#' },
+  { key: 'name', header: 'Név', sortable: true },
+  {
+    key: 'status',
+    header: 'Státusz',
+    sortable: true,
+    cell: (row) => (
+      <Badge variant={row.status === 'active' ? 'success' : 'error'} dot>
+        {row.status === 'active' ? 'Aktív' : 'Inaktív'}
+      </Badge>
+    ),
+  },
+]
+
+<DataTable
+  data={users}
+  columns={columns}
+  searchable
+  searchPlaceholder="Keresés..."
+  pageSize={20}
+  emptyText="Nincs találat."
+/>
+```
+
+### SegmentedControl
+```tsx
+import { SegmentedControl } from '@vikingo/ui'
+import { List, LayoutGrid } from 'lucide-react'
+
+// Icon + label
+<SegmentedControl
+  options={[
+    { value: 'list', icon: <List className="h-4 w-4" />, label: 'Lista' },
+    { value: 'grid', icon: <LayoutGrid className="h-4 w-4" />, label: 'Rács' },
+  ]}
+  value={view}
+  onChange={setView}
+/>
+
+// Text only
+<SegmentedControl
+  options={[
+    { value: 'day', label: 'Nap' },
+    { value: 'week', label: 'Hét' },
+    { value: 'month', label: 'Hónap' },
+  ]}
+  defaultValue="week"
+  onChange={setPeriod}
+/>
+```
+
+### Popover
+```tsx
+import { Popover, PopoverTrigger, PopoverContent, Button } from '@vikingo/ui'
+
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="secondary">Megnyit</Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-64">
+    <p className="text-sm">Bármilyen tartalom kerülhet ide.</p>
+  </PopoverContent>
+</Popover>
+```
+
+### TagsInput
+```tsx
+import { TagsInput } from '@vikingo/ui'
+
+<TagsInput
+  label="Cimkék"
+  placeholder="Írj és nyomj Entert..."
+  value={tags}
+  onChange={setTags}
+  hint="Enter vagy vesszővel adj hozzá."
+/>
+```
+
 ### Dark Mode
 ```ts
 document.documentElement.classList.toggle('dark')
