@@ -65,12 +65,41 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  /** Renders as a child element via Radix Slot — useful for wrapping links (e.g. Next.js `<Link>`) */
   asChild?: boolean
+  /** Shows a spinning loader and disables the button. Use during async operations. */
   loading?: boolean
+  /** Icon rendered to the left of the label. Hidden while `loading` is true. */
   leftIcon?: React.ReactNode
+  /** Icon rendered to the right of the label. Hidden while `loading` is true. */
   rightIcon?: React.ReactNode
+  /**
+   * Visual style of the button.
+   * - `primary` — main call-to-action (accent background)
+   * - `secondary` — secondary action (bordered surface)
+   * - `ghost` — low-emphasis action (transparent, accent on hover)
+   * - `destructive` — irreversible / dangerous action (red background)
+   * - `outline` — accent-bordered transparent button
+   * - `link` — text-only with underline on hover
+   */
+  variant?: 'primary' | 'secondary' | 'ghost' | 'destructive' | 'outline' | 'link'
+  /**
+   * Size of the button.
+   * - `sm` h-8 · `md` h-10 (default) · `lg` h-12 · `xl` h-14
+   * - `icon` h-10 w-10 square · `icon-sm` h-8 w-8 square
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'icon' | 'icon-sm'
 }
 
+/**
+ * General-purpose interactive button. Supports 6 visual variants, 6 sizes,
+ * loading state, left/right icons, and polymorphic rendering via `asChild`.
+ *
+ * @example
+ * <Button variant="primary" onClick={save}>Mentés</Button>
+ * <Button variant="destructive" isLoading>Törlés folyamatban…</Button>
+ * <Button asChild><Link href="/settings">Beállítások</Link></Button>
+ */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {

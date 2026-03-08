@@ -3,13 +3,27 @@ import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 export interface CopyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Text that will be written to the clipboard on click */
   value: string
+  /** Button label in idle state (default: 'Másolás') */
   label?: string
+  /** Button label after successful copy (default: 'Másolva!') */
   copiedLabel?: string
+  /** How long (ms) to show the copied state before resetting (default: 2000) */
   timeout?: number
+  /** Renders as a square icon-only button (h-8 w-8) without text */
   iconOnly?: boolean
 }
 
+/**
+ * Button that copies a string to the clipboard via `navigator.clipboard`.
+ * Shows a check icon for `timeout` ms after a successful copy, then resets.
+ * Silently ignores clipboard permission errors.
+ *
+ * @example
+ * <CopyButton value="npm install @vikingo/ui" />
+ * <CopyButton value={apiKey} iconOnly />
+ */
 const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
   (
     {

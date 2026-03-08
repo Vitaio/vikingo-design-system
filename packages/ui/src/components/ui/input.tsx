@@ -2,13 +2,26 @@ import * as React from 'react'
 import { cn } from '../../lib/utils'
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /** Icon rendered inside the left edge of the field (pointer-events disabled) */
   leftIcon?: React.ReactNode
+  /** Icon rendered inside the right edge of the field. Use for interactive icons (e.g. password toggle) via `pointer-events-auto` on the icon itself. */
   rightIcon?: React.ReactNode
+  /** Applies error styling (red border + red hint text) */
   error?: boolean
+  /** Helper text below the field. Rendered red when `error` is true. */
   hint?: string
+  /** Label above the field. Linked to the input via `htmlFor`. */
   label?: string
 }
 
+/**
+ * Single-line text input with optional label, hint, left/right icons, and error state.
+ * Fully controlled or uncontrolled via React's standard `value`/`defaultValue` props.
+ *
+ * @example
+ * <Input label="Email" type="email" placeholder="you@example.com" hint="Not shared publicly" />
+ * <Input label="Password" type="password" error hint="Must be at least 8 characters." />
+ */
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, leftIcon, rightIcon, error, hint, label, id, ...props }, ref) => {
     const generatedId = React.useId()

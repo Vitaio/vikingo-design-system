@@ -4,17 +4,34 @@ import { cn } from '../../lib/utils'
 
 export interface NumberInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'value'> {
+  /** Label above the field */
   label?: string
+  /** Helper text below the field. Rendered red when `error` is true. */
   hint?: string
+  /** Applies error styling to the field and hint text */
   error?: boolean
+  /** Minimum allowed value — the decrement button is disabled when `value <= min` */
   min?: number
+  /** Maximum allowed value — the increment button is disabled when `value >= max` */
   max?: number
+  /** Amount to increment/decrement per button click (default: 1) */
   step?: number
+  /** Controlled value. Provide together with `onChange`. */
   value?: number
+  /** Initial value for uncontrolled usage (default: 0) */
   defaultValue?: number
+  /** Called with the new numeric value after each change. Receives a clamped number, not an event. */
   onChange?: (value: number) => void
 }
 
+/**
+ * Numeric input with − / + stepper buttons. Supports controlled and uncontrolled modes,
+ * min/max clamping, and custom step increments. Native spin buttons are hidden.
+ *
+ * @example
+ * <NumberInput label="Mennyiség" min={1} max={99} defaultValue={1} />
+ * <NumberInput label="Összeg" step={500} value={amount} onChange={setAmount} />
+ */
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   (
     {

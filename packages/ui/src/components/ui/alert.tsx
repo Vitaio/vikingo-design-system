@@ -46,11 +46,24 @@ const iconMap = {
 export interface AlertProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof alertVariants> {
+  /** Semantic color: `info` (default) · `success` · `warning` · `error` */
+  variant?: 'info' | 'success' | 'warning' | 'error'
+  /** Optional bold heading rendered above the body */
   title?: string
+  /** When provided, renders an × close button. Called when clicked. */
   onClose?: () => void
+  /** aria-label for the close button (default: 'Bezárás') */
   closeLabel?: string
 }
 
+/**
+ * Inline feedback message with an icon, optional title, and optional close button.
+ * Use for form-level errors, success confirmations, or informational notices.
+ *
+ * @example
+ * <Alert variant="success" title="Mentés sikeres!">Az adatok elmentve.</Alert>
+ * <Alert variant="error" onClose={() => setError(null)}>{error}</Alert>
+ */
 function Alert({
   className,
   variant = 'info',

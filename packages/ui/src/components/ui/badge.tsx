@@ -37,9 +37,28 @@ const badgeVariants = cva(
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof badgeVariants> {
+  /**
+   * Visual color variant.
+   * - `default` — neutral bordered surface
+   * - `accent` / `solid` — brand color (muted bg vs filled)
+   * - `success` / `warning` / `error` / `info` — semantic status colors
+   * - `dark` — sidebar-themed dark badge
+   */
+  variant?: 'default' | 'accent' | 'success' | 'warning' | 'error' | 'info' | 'solid' | 'dark'
+  /** Size of the badge: `sm` · `md` (default) · `lg` */
+  size?: 'sm' | 'md' | 'lg'
+  /** Renders a small colored dot before the label — useful for status indicators */
   dot?: boolean
 }
 
+/**
+ * Inline label for status, category, or count.
+ * Uses monospace font; supports 8 color variants and an optional leading dot.
+ *
+ * @example
+ * <Badge variant="success" dot>Aktív</Badge>
+ * <Badge variant="error">Lejárt</Badge>
+ */
 function Badge({ className, variant, size, dot, children, ...props }: BadgeProps) {
   return (
     <span className={cn(badgeVariants({ variant, size, className }))} {...props}>

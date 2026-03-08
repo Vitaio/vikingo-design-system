@@ -12,19 +12,37 @@ export interface ComboboxOption {
   disabled?: boolean
 }
 
+/**
+ * Searchable single or multi-select dropdown built on Radix Popover.
+ * Supports keyboard navigation, option icons, and disabled options.
+ *
+ * @example
+ * // Single select
+ * <Combobox options={platforms} value={val} onChange={setVal} placeholder="Válassz platformot" />
+ *
+ * // Multi select
+ * <Combobox multiple options={countries} value={vals} onChange={setVals} />
+ */
 export interface ComboboxProps {
+  /** List of selectable options */
   options: ComboboxOption[]
+  /** Controlled selected value(s). String for single, string[] for `multiple`. */
   value?: string | string[]
+  /** Called with the new value(s) on each selection change */
   onChange?: (value: string | string[]) => void
+  /** Trigger button label when nothing is selected (default: 'Válassz...') */
   placeholder?: string
+  /** Placeholder inside the search input (default: 'Keresés...') */
   searchPlaceholder?: string
+  /** Text shown when the search query returns no results (default: 'Nincs találat') */
   emptyText?: string
   /** Returns the trigger label when multiple items are selected, e.g. (n) => `${n} selected` */
   selectedCountLabel?: (count: number) => string
+  /** Enables multi-select mode — `value` and `onChange` use `string[]` */
   multiple?: boolean
   disabled?: boolean
   className?: string
-  /** Size of the trigger button */
+  /** Size of the trigger button: `sm` · `md` (default) · `lg` */
   size?: 'sm' | 'md' | 'lg'
 }
 
