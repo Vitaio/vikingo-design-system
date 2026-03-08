@@ -1,12 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import {
-  LayoutDashboard, Megaphone, BarChart2, Settings, HelpCircle,
-  Plus, Edit, Trash2, Bell, Users, Search,
+  LayoutDashboard,
+  Megaphone,
+  BarChart2,
+  Settings,
+  HelpCircle,
+  Plus,
+  Edit,
+  Trash2,
+  Bell,
+  Users,
+  Search,
 } from 'lucide-react'
 import {
-  CommandPalette, CommandPaletteTrigger, CommandGroup, CommandItem,
-  CommandSeparator, CommandEmpty, Button,
+  CommandPalette,
+  CommandPaletteTrigger,
+  CommandGroup,
+  CommandItem,
+  CommandSeparator,
+  CommandEmpty,
+  Button,
 } from '@vikingo/ui'
 
 const meta: Meta = {
@@ -15,7 +29,13 @@ const meta: Meta = {
     layout: 'centered',
     docs: { source: { type: 'code' } },
   },
-  decorators: [(Story) => <div className="p-8 bg-[var(--color-bg)]"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="p-8 bg-[var(--color-bg)]">
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
 }
 export default meta
@@ -27,9 +47,7 @@ export const Default: Story = {
     const [open, setOpen] = useState(false)
 
     return (
-      <CommandPalette open={open} onOpenChange={setOpen}>
-        <CommandPaletteTrigger />
-
+      <CommandPalette trigger={<CommandPaletteTrigger />} open={open} onOpenChange={setOpen}>
         <CommandGroup label="Navigáció">
           <CommandItem value="Dashboard" icon={<LayoutDashboard className="h-4 w-4" />} hint="⌘1">
             Dashboard
@@ -65,7 +83,11 @@ export const Default: Story = {
           <CommandItem value="Értesítések beállítása" icon={<Bell className="h-4 w-4" />}>
             Értesítések beállítása
           </CommandItem>
-          <CommandItem value="Beállítások megnyitása" icon={<Settings className="h-4 w-4" />} hint="⌘,">
+          <CommandItem
+            value="Beállítások megnyitása"
+            icon={<Settings className="h-4 w-4" />}
+            hint="⌘,"
+          >
             Beállítások megnyitása
           </CommandItem>
           <CommandItem value="Súgó" icon={<HelpCircle className="h-4 w-4" />} hint="?">
@@ -94,9 +116,7 @@ export const WithKeyboardShortcut: Story = {
 
     return (
       <div onKeyDown={handleKeyDown} tabIndex={0} className="outline-none">
-        <CommandPalette open={open} onOpenChange={setOpen}>
-          <CommandPaletteTrigger />
-
+        <CommandPalette trigger={<CommandPaletteTrigger />} open={open} onOpenChange={setOpen}>
           <CommandGroup label="Navigáció">
             <CommandItem value="Dashboard" icon={<LayoutDashboard className="h-4 w-4" />}>
               Dashboard
@@ -126,16 +146,20 @@ export const CustomTrigger: Story = {
     const [open, setOpen] = useState(false)
 
     return (
-      <CommandPalette open={open} onOpenChange={setOpen}>
-        <div className="flex items-center gap-2">
-          <CommandPaletteTrigger>
-            <Button variant="secondary" size="sm" leftIcon={<Search className="h-4 w-4" />}>
-              Keresés…
-            </Button>
-          </CommandPaletteTrigger>
-          <span className="text-xs text-[var(--color-text-muted)]">vagy nyomj ⌘K-t</span>
-        </div>
-
+      <CommandPalette
+        trigger={
+          <div className="flex items-center gap-2">
+            <CommandPaletteTrigger>
+              <Button variant="secondary" size="sm" leftIcon={<Search className="h-4 w-4" />}>
+                Keresés…
+              </Button>
+            </CommandPaletteTrigger>
+            <span className="text-xs text-[var(--color-text-muted)]">vagy nyomj ⌘K-t</span>
+          </div>
+        }
+        open={open}
+        onOpenChange={setOpen}
+      >
         <CommandGroup label="Gyors elérés">
           <CommandItem value="Dashboard" icon={<LayoutDashboard className="h-4 w-4" />}>
             Dashboard

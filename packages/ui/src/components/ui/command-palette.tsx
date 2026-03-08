@@ -20,6 +20,8 @@ const CommandPaletteContext = React.createContext<CommandPaletteContextValue>(
 export interface CommandPaletteProps {
   open?: boolean
   onOpenChange?: (open: boolean) => void
+  /** The trigger element that opens the palette (e.g. `<CommandPaletteTrigger />`) */
+  trigger?: React.ReactNode
   children: React.ReactNode
   /** Placeholder text in the search input */
   placeholder?: string
@@ -28,6 +30,7 @@ export interface CommandPaletteProps {
 function CommandPalette({
   open,
   onOpenChange,
+  trigger,
   children,
   placeholder = 'Keresés…',
 }: CommandPaletteProps) {
@@ -43,6 +46,7 @@ function CommandPalette({
       value={{ query, setQuery, close: () => handleOpenChange(false) }}
     >
       <DialogPrimitive.Root open={open} onOpenChange={handleOpenChange}>
+        {trigger}
         <DialogPrimitive.Portal>
           <DialogPrimitive.Overlay
             className={cn(
