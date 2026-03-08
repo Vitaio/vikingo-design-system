@@ -32,6 +32,17 @@ A versioned, reusable React component library built for Vikingo SaaS products. B
 
 ---
 
+## Using with Claude Code
+
+Copy [`CONSUMER_CLAUDE.md`](./CONSUMER_CLAUDE.md) into your project root as `CLAUDE.md`. This tells Claude Code all the rules: which components exist, how to import them, what patterns to use, and what NOT to do.
+
+```bash
+# In your new project root:
+curl -o CLAUDE.md https://raw.githubusercontent.com/Vitaio/vikingo-design-system/main/CONSUMER_CLAUDE.md
+```
+
+---
+
 ## Integration Guide
 
 > **Before you start:** The design system requires **Tailwind CSS v4** and **React 18+**. The styles ship as raw Tailwind v4 source — your project must process them with the Tailwind v4 plugin.
