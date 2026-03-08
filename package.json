@@ -8,14 +8,28 @@
     "storybook": "turbo storybook",
     "build-storybook": "turbo build-storybook",
     "lint": "turbo lint",
-    "clean": "turbo clean"
+    "clean": "turbo clean",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.2",
     "turbo": "^2.5.3"
   },
   "packageManager": "pnpm@10.30.3",
   "engines": {
     "node": ">=18"
+  },
+  "lint-staged": {
+    "packages/ui/src/**/*.{ts,tsx}": [
+      "biome lint --diagnostic-level=error --no-errors-on-unmatched"
+    ],
+    "apps/storybook/stories/**/*.{ts,tsx}": [
+      "biome lint --diagnostic-level=error --no-errors-on-unmatched"
+    ],
+    "**/*.{ts,tsx,js,jsx,json}": [
+      "biome format --write"
+    ]
   }
 }
