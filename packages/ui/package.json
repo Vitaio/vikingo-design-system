@@ -35,7 +35,13 @@
   },
   "peerDependencies": {
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "recharts": ">=3",
+    "react-hook-form": ">=7"
+  },
+  "peerDependenciesMeta": {
+    "recharts": { "optional": true },
+    "react-hook-form": { "optional": true }
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
